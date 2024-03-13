@@ -58,7 +58,8 @@ export default function usersController() {
         return;
       }
       const checkPassword = await comparePassword(password, getUser.password);
-
+      console.log(checkPassword);
+      console.log('Aqui entra');
       if (!checkPassword) {
         res.send({
           status: 'error',
