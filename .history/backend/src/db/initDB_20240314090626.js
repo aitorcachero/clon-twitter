@@ -10,17 +10,19 @@ import {
 
 async function initDb() {
   try {
-    console.log(FgLightYellow, '---Eliminado tablas---');
-    await db.query('DROP TABLE IF EXISTS users, tweets, followers');
-    console.log(FgLightGreen, 'Tablas eliminadas con éxito');
+    console.log(FgLightYellow, 'Eliminado tablas');
+    const result = await db.query(
+      'DROP TABLE IF EXISTS users, tweets, followers'
+    );
+    console.log('Tablas eliminadas', result);
   } catch (error) {
-    console.log(FgLightRed, 'Error al eliminar las tablas', error);
+    console.log('Error al eliminar las tablas', error);
     process.exit();
   }
 
   try {
     console.log(FgLightMagenta, '---Creando tabla de usuarios---');
-    await db.query(`
+    const result = await db.query(`
     CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
@@ -30,46 +32,43 @@ async function initDb() {
     surname VARCHAR(150) NOT NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT (NOW())
     );`);
-    console.log(FgLightGreen, 'Tablas de usuarios creada con éxito');
+    console.log('Tablas de usuarios creada con éxito', result);
   } catch (error) {
-    console.log(FgLightRed, 'Error al crear la tabla de usuarios', error);
+    console.log('Error al crear la tabla de usuarios', error);
     process.exit();
   }
 
-  try {
-    console.log(FgLightMagenta, '---Creando tabla de tweets---');
+  // try {
+  //   console.log('Creando tabla de tweets');
+  //   const result = await db.query(`
+  //   CREATE TABLE tweets(
+  //   tweet_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  //   user_id INT NOT NULL,
+  //   tweet_text VARCHAR(280) NOT NULL,
+  //   likes INT DEFAULT 0,
+  //   retweets INT DEFAULT 0,
+  //   comments INT DEFAULT 0,
+  //   createdAt TIMESTAMP NOT NULL DEFAULT (NOW()),
+  //   FOREIGN KEY (user_id) REFERENCES users(id)
+  //   );`);
+  //   console.log('Tablas de tweets creada con éxito', result);
+  // } catch (error) {
+  //   console.log('Error al crear la tabla de tweets', error);
+  // }
 
-    await db.query(`
-    CREATE TABLE tweets(
-    tweet_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    tweet_text VARCHAR(280) NOT NULL,
-    likes INT DEFAULT 0,
-    retweets INT DEFAULT 0,
-    comments INT DEFAULT 0,
-    createdAt TIMESTAMP NOT NULL DEFAULT (NOW()),
-    FOREIGN KEY (user_id) REFERENCES users(id)
-    );`);
-    console.log(FgLightGreen, 'Tablas de tweets creada con éxito');
-  } catch (error) {
-    console.log(FgLightRed, 'Error al crear la tabla de tweets', error);
-  }
-
-  try {
-    console.log(FgLightMagenta, '---Creando tabla de followers---');
-    await db.query(`
-    CREATE TABLE followers (
-    follower_id INT NOT NULL,
-    followed_id INT NOT NULL,
-    FOREIGN KEY(follower_id) REFERENCES users(id),
-    PRIMARY KEY(follower_id, followed_id));
-    `);
-    console.log(FgLightGreen, 'Tablas de followers creada con éxito');
-  } catch (error) {
-    console.log(FgLightRed, 'Error al crear la tabla de followers', error);
-  }
-
-  process.exit();
+  // try {
+  //   console.log('Creando tabla de followers');
+  //   const result = await db.query(`
+  //   CREATE TABLE followers (
+  //   follower_id INT NOT NULL,
+  //   followed_id INT NOT NULL,
+  //   FOREIGN KEY(follower_id) REFERENCES users(id),
+  //   PRIMARY KEY(follower_id, followed_id));
+  //   `);
+  //   console.log('Tablas de followers creada con éxito', result);
+  // } catch (error) {
+  //   console.log('Error al crear la tabla de followers', error);
+  // }
 }
 
 initDb();

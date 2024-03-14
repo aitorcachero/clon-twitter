@@ -5,8 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon src/app.js",
-    "initDb": "src/db/initDB.js"
+    "start": "nodemon src/app.js"
   },
   "keywords": [],
   "author": "",

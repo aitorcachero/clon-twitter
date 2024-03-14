@@ -30,7 +30,7 @@ async function initDb() {
     surname VARCHAR(150) NOT NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT (NOW())
     );`);
-    console.log(FgLightGreen, 'Tablas de usuarios creada con éxito');
+    console.log('Tablas de usuarios creada con éxito');
   } catch (error) {
     console.log(FgLightRed, 'Error al crear la tabla de usuarios', error);
     process.exit();

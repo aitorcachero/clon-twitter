@@ -20,7 +20,7 @@ async function initDb() {
 
   try {
     console.log(FgLightMagenta, '---Creando tabla de usuarios---');
-    await db.query(`
+    const result = await db.query(`
     CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
@@ -30,7 +30,7 @@ async function initDb() {
     surname VARCHAR(150) NOT NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT (NOW())
     );`);
-    console.log(FgLightGreen, 'Tablas de usuarios creada con éxito');
+    console.log('Tablas de usuarios creada con éxito', result);
   } catch (error) {
     console.log(FgLightRed, 'Error al crear la tabla de usuarios', error);
     process.exit();

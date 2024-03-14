@@ -1,28 +1,22 @@
 import db from './dbConnect.js';
-// Importamos los colores para la consola
-import {
-  FgLightBlue,
-  FgLightGreen,
-  FgLightYellow,
-  FgLightMagenta,
-  FgLightRed,
-} from '../helpers/colorsNode.js';
 
 async function initDb() {
   try {
-    console.log(FgLightYellow, '---Eliminado tablas---');
-    await db.query('DROP TABLE IF EXISTS users, tweets, followers');
-    console.log(FgLightGreen, 'Tablas eliminadas con éxito');
+    console.log('Eliminado tablas');
+    const result = db.query(`
+      USE acachero_twitter_db;
+      DROP TABLE IF EXISTS users, tweets, followers
+      `);
+    console.log('Tablas eliminadas', result);
   } catch (error) {
-    console.log(FgLightRed, 'Error al eliminar las tablas', error);
-    process.exit();
+    console.log('Error al eliminar las tablas', error);
   }
 
   try {
-    console.log(FgLightMagenta, '---Creando tabla de usuarios---');
-    await db.query(`
+    console.log('Creando tabla de usuarios');
+    const result = db.query(`
     CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+	  id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(150) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
@@ -30,18 +24,16 @@ async function initDb() {
     surname VARCHAR(150) NOT NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT (NOW())
     );`);
-    console.log(FgLightGreen, 'Tablas de usuarios creada con éxito');
+    console.log('Tablas de usuarios creada con éxito', result);
   } catch (error) {
-    console.log(FgLightRed, 'Error al crear la tabla de usuarios', error);
-    process.exit();
+    console.log('Error al crear la tabla de usuarios', error);
   }
 
   try {
-    console.log(FgLightMagenta, '---Creando tabla de tweets---');
-
-    await db.query(`
+    console.log('Creando tabla de tweets');
+    const result = db.query(`
     CREATE TABLE tweets(
-    tweet_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	  tweet_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     tweet_text VARCHAR(280) NOT NULL,
     likes INT DEFAULT 0,
@@ -50,26 +42,24 @@ async function initDb() {
     createdAt TIMESTAMP NOT NULL DEFAULT (NOW()),
     FOREIGN KEY (user_id) REFERENCES users(id)
     );`);
-    console.log(FgLightGreen, 'Tablas de tweets creada con éxito');
+    console.log('Tablas de tweets creada con éxito', result);
   } catch (error) {
-    console.log(FgLightRed, 'Error al crear la tabla de tweets', error);
+    console.log('Error al crear la tabla de tweets', error);
   }
 
   try {
-    console.log(FgLightMagenta, '---Creando tabla de followers---');
-    await db.query(`
+    console.log('Creando tabla de followers');
+    const result = db.query(`
     CREATE TABLE followers (
-    follower_id INT NOT NULL,
+	  follower_id INT NOT NULL,
     followed_id INT NOT NULL,
     FOREIGN KEY(follower_id) REFERENCES users(id),
     PRIMARY KEY(follower_id, followed_id));
     `);
-    console.log(FgLightGreen, 'Tablas de followers creada con éxito');
+    console.log('Tablas de followers creada con éxito', result);
   } catch (error) {
-    console.log(FgLightRed, 'Error al crear la tabla de followers', error);
+    console.log('Error al crear la tabla de followers', error);
   }
-
-  process.exit();
 }
 
 initDb();
