@@ -32,9 +32,10 @@ export default function tweetsModel() {
 
   const deleteTweet = async (id) => {
     try {
-      const [result] = await db.query(`DELETE FROM tweets WHERE tweet_id = ?`, [
-        id,
-      ]);
+      const [result] = await db.query(
+        `DELETE * FROM tweets WHERE tweet_id = ?`,
+        [id]
+      );
       return result;
     } catch (error) {
       console.log(error);

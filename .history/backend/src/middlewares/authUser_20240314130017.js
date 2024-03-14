@@ -17,6 +17,8 @@ export default async function authUser(req, res, next) {
     // Variable que almacenará la información del token una vez desencriptado.
     const userInfoID = jwt.verify(authorization, SECRET).id;
 
+    console.log(userInfoID);
+
     // Agregamos una nueva propiedad inventada por nosotros al objeto "request".
     req.user = userInfoID;
 

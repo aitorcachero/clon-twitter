@@ -16,17 +16,7 @@ export default function tweetsController() {
     const { id } = req.params;
     try {
       const getTweet = await tweetsModel().getTweets(id);
-      if (getTweet.length > 0) {
-        res.send({
-          status: 'ok',
-          data: getTweet,
-        });
-      } else {
-        res.send({
-          status: 'error',
-          message: 'No existe el tweet',
-        });
-      }
+      console.log(getTweet);
     } catch (error) {
       console.log(error);
     }

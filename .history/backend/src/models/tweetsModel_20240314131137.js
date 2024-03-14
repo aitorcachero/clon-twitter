@@ -7,10 +7,9 @@ export default function tweetsModel() {
         const [result] = await db.query('SELECT * FROM tweets');
         return result;
       } else {
-        const [result] = await db.query(
-          'SELECT * FROM tweets WHERE tweet_id = ?',
-          [id]
-        );
+        const [result] = await db.query('SELECT * FROM tweets WHERE id = ?', [
+          id,
+        ]);
         return result;
       }
     } catch (error) {
@@ -32,9 +31,10 @@ export default function tweetsModel() {
 
   const deleteTweet = async (id) => {
     try {
-      const [result] = await db.query(`DELETE FROM tweets WHERE tweet_id = ?`, [
-        id,
-      ]);
+      const [result] = await db.query(
+        `DELETE * from tweets WHERE tweet_id = ?`,
+        [id]
+      );
       return result;
     } catch (error) {
       console.log(error);

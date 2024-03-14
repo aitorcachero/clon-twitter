@@ -4,16 +4,14 @@ import cors from 'cors';
 //Routes
 
 import usersRoutes from './routes/usersRoutes.js';
-import tweetsRoutes from './routes/tweetsRoutes.js';
-import followRoutes from './routes/followersRoutes.js';
+import tweetsRouter from './routes/tweetsRoutes.js';
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
 app.use('/users', usersRoutes);
-app.use('/tweets', tweetsRoutes);
-app.use('/follow', followRoutes);
+app.use('/tweets', tweetsRouter);
 
 app.listen(3000, () =>
   console.log('Servidor funcionando en http://localhost:3000')

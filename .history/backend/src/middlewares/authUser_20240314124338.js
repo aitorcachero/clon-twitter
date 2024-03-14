@@ -19,20 +19,9 @@ export default async function authUser(req, res, next) {
 
     // Agregamos una nueva propiedad inventada por nosotros al objeto "request".
     req.user = userInfoID;
-
-    next();
+    console.log(userInfoID);
+    // next();
   } catch (error) {
     console.log(error);
-    if (
-      error.name === 'JsonWebTokenError' &&
-      error.message === 'invalid token'
-    ) {
-      res.send({
-        status: 'error',
-        message: 'Token invalido',
-      });
-    } else {
-      res.send({ error });
-    }
   }
 }
