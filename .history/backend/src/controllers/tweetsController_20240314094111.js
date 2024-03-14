@@ -2,7 +2,7 @@ import tweetsModel from '../models/tweetsModel.js';
 export default function tweetsController() {
   const getAllTweets = async (req, res) => {
     try {
-      const getTweets = await tweetsModel().getAllTweets();
+      const getTweets = tweetsModel().getAllTweets();
       res.send({
         status: 'ok',
         data: getTweets,
@@ -24,7 +24,7 @@ export default function tweetsController() {
     }
 
     try {
-      await tweetsModel().createTweet(userId, text);
+      const insertTweet = tweetsModel().createTweet(userId, text);
       res.send({
         status: 'ok',
         data: { user: userId, texto: text },
@@ -34,5 +34,5 @@ export default function tweetsController() {
     }
   };
 
-  return { getAllTweets, createTweet };
+  return { createTweet };
 }

@@ -11,7 +11,6 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/users', usersRoutes);
-app.use('/tweets', tweetsRouter);
 
 app.listen(3000, () =>
   console.log('Servidor funcionando en http://localhost:3000')

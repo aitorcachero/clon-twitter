@@ -50,8 +50,7 @@ export default function usersController() {
     try {
       const { username, password } = req.body;
       const [getUser] = await usersModel().getUserByUsername(username);
-      console.log(getUser);
-      if (getUser?.length === 0 || !getUser) {
+      if (getUser.length === 0) {
         res.send({
           status: 'error',
           message: 'Creedenciales invalidas',

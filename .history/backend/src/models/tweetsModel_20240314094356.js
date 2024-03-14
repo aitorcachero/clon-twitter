@@ -3,7 +3,7 @@ import db from '../db/dbConnect.js';
 export default function tweetsModel() {
   const getAllTweets = async () => {
     try {
-      const [result] = await db.query('SELECT * FROM tweets');
+      const result = await db.query('SELECT * FROM tweets');
       console.log(result);
       return result;
     } catch (error) {

@@ -2,7 +2,7 @@ import tweetsModel from '../models/tweetsModel.js';
 export default function tweetsController() {
   const getAllTweets = async (req, res) => {
     try {
-      const getTweets = await tweetsModel().getAllTweets();
+      const getTweets = tweetsModel().getAllTweets();
       res.send({
         status: 'ok',
         data: getTweets,

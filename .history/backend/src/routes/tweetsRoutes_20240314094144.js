@@ -6,6 +6,5 @@ const router = express.Router();
 
 router.get('/', tweetsController().getAllTweets);
 router.post('/', authUser, tweetsController().createTweet);
-router.delete('/', authUser);
 
 export default router;
