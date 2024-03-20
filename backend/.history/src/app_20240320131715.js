@@ -17,4 +17,6 @@ app.use('/users', usersRoutes);
 app.use('/tweets', tweetsRoutes);
 app.use('/follow', followRoutes);
 
-app.listen(3000, () => console.log('Servidor funcionando en el puerto 3000'));
+app.listen(3000, () =>
+  console.log('Servidor funcionando en http://192.168.1.136:3000')
+);

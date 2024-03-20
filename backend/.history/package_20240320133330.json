@@ -1,12 +1,13 @@
 {
   "name": "backend",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "start": "nodemon src/app.js",
     "initDb": "src/db/initDB.js",
-    "build": "tsc build ",
+    "build": "tsc",
     "vercel-build": "echo hello"
   },
   "keywords": [],
@@ -25,6 +26,5 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2"
-  },
-  "description": ""
+  }
 }
