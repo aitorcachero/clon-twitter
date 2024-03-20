@@ -19,7 +19,7 @@ export default function UserPage() {
   }, [user]);
 
   return (
-    <div className="w-full flex justify-center items-center p-4 lg:p-0">
+    <div className="w-full flex justify-center items-center p-4 md:p-0">
       {fullUser && <CardUser fullUser={fullUser} />}
     </div>
   );

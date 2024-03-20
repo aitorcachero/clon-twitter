@@ -61,7 +61,7 @@ export default function RegisterPage() {
     <div className="bg-white dark:bg-gray-900">
       <div className="flex flex-row-reverse justify-center h-screen">
         <div
-          className="hidden bg-cover lg:block lg:w-2/3"
+          className="hidden bg-cover md:block md:w-2/3"
           style={{
             backgroundImage:
               'url(https://images.unsplash.com/photo-1616763355603-9755a640a287?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)',
@@ -78,7 +78,7 @@ export default function RegisterPage() {
           </div>
         </div>
 
-        <div className="flex items-start  w-full max-w-md px-6 mx-auto lg:w-2/6">
+        <div className="flex items-start  w-full max-w-md px-6 mx-auto md:w-2/6">
           <div className="flex-1">
             <div className="text-center">
               <h2 className="text-4xl font-bold text-center text-gray-700 dark:text-white">

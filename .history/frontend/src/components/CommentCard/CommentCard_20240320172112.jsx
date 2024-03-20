@@ -8,7 +8,7 @@ import userDefaulIcon from '../../assets/icons/user-default-icon.svg';
 export default function CommentCard({ tweet }) {
   return (
     <article
-      className="border-l-[5px] border-slate-700 bg-zinc-900 p-6 w-full lg:w-[500px] flex flex-col justify-between gap-2 my-4"
+      className="border-l-[5px] border-slate-700 bg-zinc-900 p-6 w-full md:w-[500px] flex flex-col justify-between gap-2 my-4"
       style={{
         background: 'linear-gradient(71deg, #080509, #1a171c, #080509)',
         backgroundClip: 'padding-box',

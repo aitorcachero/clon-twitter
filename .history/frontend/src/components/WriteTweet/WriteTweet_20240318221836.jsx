@@ -36,7 +36,7 @@ export default function WriteTweet({ tweets, setTweets }) {
 
   return (
     <article
-      className="border border-slate-700 rounded-xl bg-zinc-900 p-6 w-full lg:w-[500px] flex flex-col justify-between gap-2 my-4"
+      className="border border-slate-700 rounded-xl bg-zinc-900 p-6 w-full md:w-[500px] flex flex-col justify-between gap-2 my-4"
       style={{
         background: 'linear-gradient(71deg, #080509, #1a171c, #080509)',
         backgroundClip: 'padding-box',
@@ -68,7 +68,7 @@ export default function WriteTweet({ tweets, setTweets }) {
           </span>
           /280
         </p>
-        <p className="absolute left-0 px-4 text-red-700 text-sm lg:text-base">
+        <p className="absolute left-0 px-4 text-red-700 text-sm md:text-base">
           {errorText}
         </p>
 

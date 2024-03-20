@@ -5,7 +5,7 @@ export default function FollowersComponent({ userFollower }) {
   return (
     <a href={`/user/${userFollower.username}`}>
       <article
-        className="border border-slate-700 rounded-xl bg-zinc-900 p-4 w-full lg:w-[400px] flex flex-row justify-between gap-2 my-2"
+        className="border border-slate-700 rounded-xl bg-zinc-900 p-4 w-full md:w-[400px] flex flex-row justify-between gap-2 my-2"
         style={{
           background: 'linear-gradient(71deg, #080509, #1a171c, #080509)',
           backgroundClip: 'padding-box',

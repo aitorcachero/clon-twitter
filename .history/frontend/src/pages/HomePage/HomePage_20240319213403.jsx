@@ -9,7 +9,7 @@ export default function HomePage() {
   const { authUser } = useAuth();
 
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center p-4 lg:p-0">
+    <div className="w-full h-full flex flex-col justify-center items-center p-4 md:p-0">
       {authUser && <WriteTweet tweets={tweets} setTweets={setTweets} />}
       {tweets &&
         tweets.length > 0 &&

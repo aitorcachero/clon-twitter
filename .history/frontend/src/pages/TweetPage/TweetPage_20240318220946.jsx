@@ -16,7 +16,7 @@ export default function TweetPage() {
   }, []);
 
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center gap-4 lg:gap-0">
+    <div className="w-full h-full flex flex-col justify-center items-center gap-4 md:gap-0">
       {tweets && <CardTwitter tweet={tweets.find((x) => x.tweet_id === +id)} />}
       {authToken && <WriteComment id={id} />}
       {comments && comments.length > 0 && (
