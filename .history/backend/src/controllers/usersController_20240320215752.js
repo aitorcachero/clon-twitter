@@ -20,7 +20,7 @@ export default function usersController() {
 
       // Comprobamos si el email existe
       const getUserByEmail = await usersModel().getUserByEmail(email);
-      if (getUserByName && getUserByEmail.length > 0) {
+      if (getUserByEmail.length > 0) {
         res.send({
           status: 'error',
           message: 'Ya existe un usuario con ese correo electrónico',

@@ -16,8 +16,7 @@ export default function RegisterPage() {
   const [surname, setSurname] = useState('');
   const [description, setDescription] = useState('');
   const [error, setError] = useState(false);
-  const { authLogin } = useAuth();
-  const [loading, setLoading] = useState(false);
+  const { authLogin, loading } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,7 +38,6 @@ export default function RegisterPage() {
     }
 
     try {
-      setLoading(true);
       const newUser = await registerUserService(
         username,
         password,
@@ -59,8 +57,6 @@ export default function RegisterPage() {
       }
     } catch (error) {
       console.log(error);
-    } finally {
-      setLoading(false);
     }
   };
 

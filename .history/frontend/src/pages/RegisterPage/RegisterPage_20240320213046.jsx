@@ -16,8 +16,7 @@ export default function RegisterPage() {
   const [surname, setSurname] = useState('');
   const [description, setDescription] = useState('');
   const [error, setError] = useState(false);
-  const { authLogin } = useAuth();
-  const [loading, setLoading] = useState(false);
+  const { authLogin, loading } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,7 +38,6 @@ export default function RegisterPage() {
     }
 
     try {
-      setLoading(true);
       const newUser = await registerUserService(
         username,
         password,
@@ -59,8 +57,6 @@ export default function RegisterPage() {
       }
     } catch (error) {
       console.log(error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -235,9 +231,7 @@ export default function RegisterPage() {
                   <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-2">
                     Registrar
                   </button>
-                  <div className="absolute right-1/4 top-1">
-                    {loading && <Loader width="30px" heigth="30px" />}
-                  </div>
+                  {loading && <Loader width="30px" heigth="30px" />}
                   {error && <p className="text-center text-red-600">{error}</p>}
                 </div>
               </form>

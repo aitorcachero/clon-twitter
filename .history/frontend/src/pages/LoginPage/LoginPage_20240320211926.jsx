@@ -7,11 +7,10 @@ import Loader from '../../components/Loader/Loader';
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { authLogin, loading } = useAuth();
+  const { authLogin, loader } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (username === '' || password === '') return;
     authLogin(username, password);
   };
 
@@ -100,10 +99,10 @@ export default function LoginPage() {
                 </div>
 
                 <div className="mt-6">
-                  <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50 flex flex-row justify-center items-center relative">
+                  <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50 flex flex-row justify-center items-center">
                     <p>Entrar</p>
-                    <div className="absolute w-10 h-10 right-1/4 top-1">
-                      {loading && <Loader width="30px" heigth="30px" />}
+                    <div>
+                      <Loader />
                     </div>
                   </button>
                 </div>

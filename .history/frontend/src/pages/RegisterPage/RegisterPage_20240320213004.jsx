@@ -5,7 +5,6 @@ import { toast } from 'react-toastify';
 import { registerUserService } from '../../services/fetchData';
 import checkRegisterData from '../../services/checkRegisterData.js';
 import bgImage from '../../assets/bg-wave.webp';
-import Loader from '../../components/Loader/Loader.jsx';
 
 export default function RegisterPage() {
   const [username, setUsername] = useState('');
@@ -16,8 +15,7 @@ export default function RegisterPage() {
   const [surname, setSurname] = useState('');
   const [description, setDescription] = useState('');
   const [error, setError] = useState(false);
-  const { authLogin } = useAuth();
-  const [loading, setLoading] = useState(false);
+  const { authLogin, loading } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,7 +37,6 @@ export default function RegisterPage() {
     }
 
     try {
-      setLoading(true);
       const newUser = await registerUserService(
         username,
         password,
@@ -59,8 +56,6 @@ export default function RegisterPage() {
       }
     } catch (error) {
       console.log(error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -231,13 +226,10 @@ export default function RegisterPage() {
                   onChange={(e) => setDescription(e.target.value)}
                 />
 
-                <div className="mt-6 relative">
+                <div className="mt-6">
                   <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50 mb-2">
                     Registrar
                   </button>
-                  <div className="absolute right-1/4 top-1">
-                    {loading && <Loader width="30px" heigth="30px" />}
-                  </div>
                   {error && <p className="text-center text-red-600">{error}</p>}
                 </div>
               </form>

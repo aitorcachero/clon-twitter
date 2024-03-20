@@ -39,7 +39,6 @@ export default function RegisterPage() {
     }
 
     try {
-      setLoading(true);
       const newUser = await registerUserService(
         username,
         password,
@@ -59,8 +58,6 @@ export default function RegisterPage() {
       }
     } catch (error) {
       console.log(error);
-    } finally {
-      setLoading(false);
     }
   };
 
