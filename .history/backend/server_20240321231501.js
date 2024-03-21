@@ -1,5 +1,5 @@
 import express from 'express';
-import cors from 'cors';
+// import cors from 'cors';
 
 // Create an Express app and listen for incoming requests on port 3000
 const app = express();
@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 // Use middleware to parse incoming requests with JSON and URL-encoded payloads
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(cors());
+// app.use(cors());
 
 import usersRoutes from './routes/usersRoutes.js';
 import tweetsRoutes from './routes/tweetsRoutes.js';
