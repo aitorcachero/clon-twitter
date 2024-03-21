@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (req, res) => res.send('Bienvenido al clon de Twitter moderno!'));
+app.get('/', (req, res) => res.send('Express on Vercel'));
 
 app.use('/users', usersRoutes);
 app.use('/tweets', tweetsRoutes);
