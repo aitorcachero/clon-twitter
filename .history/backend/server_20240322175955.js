@@ -39,7 +39,7 @@ app.use('/users', usersRoutes);
 app.use('/tweets', tweetsRoutes);
 app.use('/follow', followRoutes);
 
-// Start the server and listen for incoming connections
+Start the server and listen for incoming connections
 app.listen(PORT, () => {
   console.log(`Server running at https://localhost:${PORT}/`);
 });
