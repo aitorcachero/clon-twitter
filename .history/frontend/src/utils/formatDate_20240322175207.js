@@ -43,6 +43,7 @@ export default function formatDate(date) {
   }
 
   if (DIFERENCIA_DIAS < 3) {
+    console.log(typeof DIFERENCIA_DIAS);
     if (DIFERENCIA_DIAS === '1') {
       return `Ayer a las ${hours}:${minutes}`;
     }

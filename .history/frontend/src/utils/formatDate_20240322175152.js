@@ -25,14 +25,14 @@ export default function formatDate(date) {
   }
 
   if (DIFERENCIA_MINUTOS < 60) {
-    if (DIFERENCIA_MINUTOS === '1') {
+    if (DIFERENCIA_MINUTOS === 1) {
       return `Hace ${DIFERENCIA_MINUTOS} minuto`;
     }
     return `Hace ${DIFERENCIA_MINUTOS} minutos`;
   }
 
   if (DIFERENCIA_HORAS < 24) {
-    if (DIFERENCIA_HORAS === '1') {
+    if (DIFERENCIA_HORAS === 1) {
       return `Hace ${DIFERENCIA_HORAS} hora`;
     }
     return `Hace ${DIFERENCIA_HORAS} horas`;
@@ -43,6 +43,7 @@ export default function formatDate(date) {
   }
 
   if (DIFERENCIA_DIAS < 3) {
+    console.log(typeof DIFERENCIA_DIAS);
     if (DIFERENCIA_DIAS === '1') {
       return `Ayer a las ${hours}:${minutes}`;
     }
