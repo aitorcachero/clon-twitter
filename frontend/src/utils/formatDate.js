@@ -41,14 +41,8 @@ export default function formatDate(date) {
     return `Hace ${DIFERENCIA_HORAS} horas`;
   }
 
-  if (DIFERENCIA_DIAS < 3) {
-    if (DIFERENCIA_DIAS === '1') {
-      return `Ayer a las ${hours}:${minutes}`;
-    }
-    if (DIFERENCIA_DIAS === '2') {
-      return `Antes de ayer a las ${hours}:${minutes}`;
-    }
-    return `Hace ${DIFERENCIA_DIAS} dias`;
+  if (DIFERENCIA_DIAS < 2) {
+    return `Ayer a las ${hours}:${minutes}`;
   }
 
   const DAYS = {
