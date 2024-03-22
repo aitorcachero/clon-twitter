@@ -1,8 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import commentsImg from '../../assets/icons/card-comments.svg';
-import likesImg from '../../assets/icons/card-likes.svg';
-import retweetsImg from '../../assets/icons/card-retweets.svg';
-import formatDate from '../../utils/formatDate';
+// import formatDate from '../../utils/formatDate';
 import userDefaulIcon from '../../assets/icons/user-default-icon.svg';
 import getRandomColor from '../../utils/getRandomColor';
 
@@ -29,7 +26,7 @@ export default function CommentCard({ tweet }) {
       </h2>
 
       <p className="text-orange-600 text-sm text-end">
-        {formatDate(tweet.createdAt)}
+        {/* {formatDate(tweet.createdAt)} */}
       </p>
 
       {/* </a> */}
