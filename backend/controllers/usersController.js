@@ -72,7 +72,6 @@ export default function usersController() {
     try {
       const { username, password } = req.body;
       const [getUser] = await usersModel().getUserByUsername(username);
-      console.log(getUser);
       if (getUser?.length === 0 || !getUser) {
         res.send({
           status: 'error',
@@ -146,7 +145,6 @@ export default function usersController() {
   };
 
   const getTopUsers = async (req, res) => {
-    console.log('entra');
     try {
       const getTopsUsers = await usersModel().getTopUsers();
       res.send(getTopsUsers);

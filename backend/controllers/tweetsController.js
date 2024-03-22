@@ -61,7 +61,6 @@ export default function tweetsController() {
     try {
       const createTweet = await tweetsModel().createTweet(userId, text);
       if (createTweet.errno) {
-        console.log(createTweet.error);
         res.send({
           status: 'error',
           message: createTweet.message,
@@ -95,7 +94,6 @@ export default function tweetsController() {
         text
       );
       if (createComment.errno) {
-        console.log(createComment.error);
         res.send({
           status: 'error',
           message: createComment.message,
@@ -149,7 +147,6 @@ export default function tweetsController() {
     const { id } = req.body;
     try {
       const getTweet = await tweetsModel().getTweets(id);
-      console.log(getTweet);
       if (getTweet.length === 0) {
         res.send({
           status: 'error',
@@ -161,7 +158,6 @@ export default function tweetsController() {
           status: 'ok',
           message: 'Tweet eliminado',
         });
-        console.log(deleteTweet);
       }
     } catch (error) {
       console.log(error);

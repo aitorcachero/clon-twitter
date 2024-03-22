@@ -28,7 +28,6 @@ export const TweetProvider = ({ children }) => {
   useEffect(() => {
     fetch(`${APIUrl}/tweets/`)
       .then((results) => results.json())
-      // .then((data) => console.log(data));
       .then((data) =>
         setTweets(data.data.sort((a, b) => b.createdAt - a.createdAt))
       );
@@ -37,7 +36,6 @@ export const TweetProvider = ({ children }) => {
   const getTweets = () => {
     fetch(`${APIUrl}/tweets/`)
       .then((results) => results.json())
-      // .then((data) => console.log(data));
       .then((data) =>
         setTweets(data.data.sort((a, b) => b.createdAt - a.createdAt))
       );
@@ -45,7 +43,6 @@ export const TweetProvider = ({ children }) => {
 
   const getTweet = async (id) => {
     const tweet = await tweets?.find((x) => x.tweet_id === id);
-    console.log(tweet);
     return tweet;
   };
 

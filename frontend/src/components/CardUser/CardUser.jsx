@@ -43,7 +43,7 @@ export default function CardUser({ fullUser }) {
     }
 
     const followService = await followUserService(user.username, authToken);
-    console.log(followService);
+
     if (followService.status === 'ok') setFollow(!follow);
   };
 

@@ -35,7 +35,6 @@ export default function followersModel() {
   };
 
   const unfollowUser = async (follower, followed) => {
-    console.log(follower, followed);
     try {
       const [result] = await db.query(
         `DELETE FROM followers WHERE follower_id = ? AND followed_id = ?`,
