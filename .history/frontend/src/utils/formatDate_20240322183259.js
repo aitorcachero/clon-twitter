@@ -20,7 +20,7 @@ export default function formatDate(date) {
   const DIFERENCIA_MINUTOS = (DIFERENCIA / 1000 / 60).toFixed();
   const DIFERENCIA_SEGUNDOS = (DIFERENCIA / 1000).toFixed();
 
-  if (DIFERENCIA_SEGUNDOS < 60 && DIFERENCIA_SEGUNDOS >= 0) {
+  if (DIFERENCIA_SEGUNDOS < 60) {
     if (DIFERENCIA_SEGUNDOS < 5 && DIFERENCIA_SEGUNDOS >= 0) {
       return `Ahora mismo`;
     }
