@@ -1,6 +1,6 @@
 export default function formatDate(date) {
   // Parsear la fecha y hora en el formato original
-  var dateTime = new Date(date.replace(/Z/g, 'T'));
+  var dateTime = new Date(date);
 
   // Obtener las partes de la fecha y hora
   var year = dateTime.getFullYear();
@@ -21,9 +21,6 @@ export default function formatDate(date) {
   const DIFERENCIA_SEGUNDOS = (DIFERENCIA / 1000).toFixed();
 
   if (DIFERENCIA_SEGUNDOS < 60) {
-    if (DIFERENCIA_SEGUNDOS < 5) {
-      return `Ahora mismo`;
-    }
     return `Hace ${DIFERENCIA_SEGUNDOS} segundos`;
   }
 
@@ -39,6 +36,13 @@ export default function formatDate(date) {
       return `Hace ${DIFERENCIA_HORAS} hora`;
     }
     return `Hace ${DIFERENCIA_HORAS} horas`;
+  }
+
+  if (DIFERENCIA_SEGUNDOS < 60) {
+    if (DIFERENCIA_SEGUNDOS < 8) {
+      return `Ahora mismo`;
+    }
+    return `Hace ${DIFERENCIA_SEGUNDOS} segundos`;
   }
 
   if (DIFERENCIA_DIAS < 3) {

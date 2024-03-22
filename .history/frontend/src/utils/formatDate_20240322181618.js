@@ -1,6 +1,6 @@
 export default function formatDate(date) {
   // Parsear la fecha y hora en el formato original
-  var dateTime = new Date(date.replace(/Z/g, 'T'));
+  var dateTime = new Date(date);
 
   // Obtener las partes de la fecha y hora
   var year = dateTime.getFullYear();
