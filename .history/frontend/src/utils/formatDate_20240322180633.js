@@ -14,9 +14,9 @@ export default function formatDate(date) {
 
   const FECHA_ACTUAL = new Date();
   const FECHA_PARSEADA = new Date(date);
-  const DIFERENCIA = FECHA_ACTUAL - FECHA_PARSEADA + 3600;
+  const DIFERENCIA = FECHA_ACTUAL - FECHA_PARSEADA;
   const DIFERENCIA_DIAS = (DIFERENCIA / 1000 / 60 / 60 / 24).toFixed();
-  const DIFERENCIA_HORAS = (DIFERENCIA / 1000 / 60 / 60).toFixed();
+  const DIFERENCIA_HORAS = DIFERENCIA / 1000 / 60 / 60 - (1).toFixed();
   const DIFERENCIA_MINUTOS = (DIFERENCIA / 1000 / 60).toFixed();
   const DIFERENCIA_SEGUNDOS = (DIFERENCIA / 1000).toFixed();
 
