@@ -44,10 +44,10 @@ export default function formatDate(date) {
 
   if (DIFERENCIA_DIAS < 3) {
     console.log(typeof DIFERENCIA_DIAS);
-    if (DIFERENCIA_DIAS === '1') {
+    if (DIFERENCIA_DIAS === 1) {
       return `Ayer a las ${hours}:${minutes}`;
     }
-    if (DIFERENCIA_DIAS === '2') {
+    if (DIFERENCIA_DIAS === 2) {
       console.log(DIFERENCIA_DIAS);
       console.log('entra?');
       return `Antes de ayer a las ${hours}:${minutes}`;
