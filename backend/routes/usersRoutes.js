@@ -5,6 +5,7 @@ import authUser from '../middlewares/authUser.js';
 const router = express.Router();
 
 router.get('/authToken', authUser, usersController().authLoginUser);
+router.get('/users/tops', usersController().getTopUsers);
 router.get('/:user', usersController().getUserByUsername);
 router.post('/', usersController().createUser);
 router.post('/login', usersController().loginUser);

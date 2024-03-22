@@ -124,6 +124,30 @@ export default function usersModel() {
     }
   };
 
+  const getTopUsers = async () => {
+    try {
+      const [topFollowers] = await db.query(
+        `SELECT U.id, U.username, U.name, U.surname, U.photo, U.description, COUNT(F.follower_id) as followers FROM users U LEFT JOIN followers F ON U.id = F.follower_id GROUP BY U.id ORDER BY followers DESC LIMIT 3`
+      );
+
+      const [topFollowings] = await db.query(
+        `SELECT U.id, U.username, U.name, U.surname, U.photo, U.description, COUNT(F.followed_id) as following FROM users U LEFT JOIN followers F ON U.id = F.followed_id GROUP BY U.id ORDER BY following DESC LIMIT 3`
+      );
+
+      const [topTweets] = await db.query(
+        `SELECT U.id, U.username, U.name, U.surname, U.photo, U.description, COUNT(T.user_id) as tweets FROM users U LEFT JOIN tweets T ON U.id = T.user_id GROUP BY U.id ORDER BY tweets DESC LIMIT 3`
+      );
+      const [topLikes] = await db.query(
+        `SELECT U.id, U.username, U.name, U.surname, U.photo, U.description, COUNT(L.user_id) as likes FROM users U LEFT JOIN likes L ON U.id = L.user_id GROUP BY U.id ORDER BY likes DESC LIMIT 3`
+      );
+      return { topFollowers, topFollowings, topTweets, topLikes };
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // SELECT T.user_id, COUNT(T.user_id) AS tweets, U.username  FROM tweets T JOIN users U ON T.user_id = U.id GROUP BY user_id ORDER BY tweets DESC LIMIT 3
+
   return {
     getUserById,
     getUserByUsername,
@@ -132,5 +156,6 @@ export default function usersModel() {
     deleteUser,
     getFollowers,
     getFollows,
+    getTopUsers,
   };
 }

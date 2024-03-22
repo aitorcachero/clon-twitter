@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import logoutImg from '../../assets/icons/logout-icon.svg';
+
 import formatDate from '../../utils/formatDate';
 import CardTwitter from '../CardTwitter/CardTwitter';
 import useAuth from '../../hooks/useAuth';
@@ -12,7 +14,7 @@ import FollowersComponent from '../FollowersComponent/FollowersComponent';
 
 export default function CardUser({ fullUser }) {
   const navigate = useNavigate();
-  const { authUser, authToken } = useAuth();
+  const { authUser, authToken, authLogout } = useAuth();
 
   const [render, setRender] = useState('tweets');
 
@@ -46,10 +48,10 @@ export default function CardUser({ fullUser }) {
   };
 
   return (
-    <div className="flex flex-col w-full justify-center items-center">
+    <div className="flex flex-col w-full justify-center items-center ">
       {user && (
         <article
-          className="border min-w-[300px] border-slate-700 rounded-xl bg-zinc-900 p-6 w-full md:w-[500px] flex flex-col justify-between gap-2 my-4"
+          className="border min-w-[300px] border-slate-700 rounded-xl bg-zinc-900 p-6 w-full md:w-[500px] flex flex-col justify-between gap-2 my-4 relative"
           style={{
             background: 'linear-gradient(71deg, #080509, #1a171c, #080509)',
             backgroundClip: 'padding-box',
@@ -124,6 +126,14 @@ export default function CardUser({ fullUser }) {
               {buttonFollow}
             </button>
           </div>
+          {authUser?.id === fullUser?.user.id && (
+            <img
+              src={logoutImg}
+              width={30}
+              className="absolute bottom-5 right-5 hover:cursor-pointer"
+              onClick={() => authLogout()}
+            />
+          )}
         </article>
       )}
 

@@ -145,11 +145,22 @@ export default function usersController() {
     }
   };
 
+  const getTopUsers = async (req, res) => {
+    console.log('entra');
+    try {
+      const getTopsUsers = await usersModel().getTopUsers();
+      res.send(getTopsUsers);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     createUser,
     authLoginUser,
     loginUser,
     getUserByUsername,
     deleteUser,
+    getTopUsers,
   };
 }
