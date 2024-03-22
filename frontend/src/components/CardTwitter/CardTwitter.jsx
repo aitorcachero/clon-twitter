@@ -33,17 +33,18 @@ export default function CardTwitter({ tweet }) {
       return;
     }
     const { tweet_id } = tweet;
+
+    if (likedByMe) {
+      setLikes(likes - 1);
+    } else {
+      setLikes(likes + 1);
+    }
+
+    setLikedByMe(!likedByMe);
     try {
-      const like = await likesService(tweet_id, authToken);
-      if (likedByMe) {
-        setLikes(likes - 1);
-      } else {
-        setLikes(likes + 1);
-      }
+      await likesService(tweet_id, authToken);
     } catch (error) {
       console.log(error);
-    } finally {
-      setLikedByMe(!likedByMe);
     }
   };
 
