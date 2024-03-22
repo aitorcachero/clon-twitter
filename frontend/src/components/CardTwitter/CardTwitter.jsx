@@ -35,11 +35,10 @@ export default function CardTwitter({ tweet }) {
     const { tweet_id } = tweet;
     try {
       const like = await likesService(tweet_id, authToken);
-      if (like.status === 'ok' && like.message === '+') {
-        setLikes((prev) => prev + 1);
-      }
-      if (like.status === 'ok' && like.message === '-') {
-        setLikes((prev) => prev - 1);
+      if (likedByMe) {
+        setLikes(likes - 1);
+      } else {
+        setLikes(likes + 1);
       }
     } catch (error) {
       console.log(error);
