@@ -70,9 +70,9 @@ export default function CardTwitter({ tweet }) {
           {formatDate(tweet.createdAt)}
         </p>
       </header>
-      <a href={`/tweet/${tweet?.tweet_id}`}>
+      <NavLink to={`/tweet/${tweet?.tweet_id}`}>
         <h2 className="text-slate-500 my-5 text-center">{tweet.tweet_text}</h2>
-      </a>
+      </NavLink>
 
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-row justify-center items-center gap-2">
