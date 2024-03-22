@@ -37,15 +37,17 @@ export default function CardTwitter({ tweet }) {
       const like = await likesService(tweet_id, authToken);
       if (like.status === 'ok' && like.message === '+') {
         setLikes((prev) => prev + 1);
+
       }
       if (like.status === 'ok' && like.message === '-') {
         setLikes((prev) => prev - 1);
+
       }
     } catch (error) {
       console.log(error);
+
     } finally {
       setLikedByMe(!likedByMe);
-    }
   };
 
   const COLOR_HEART = likedByMe ? '#F91880' : '#FFFFFF';
