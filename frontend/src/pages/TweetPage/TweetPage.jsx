@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import CardTwitter from '../../components/CardTwitter/CardTwitter';
 import useTweet from '../../hooks/useTweets';
