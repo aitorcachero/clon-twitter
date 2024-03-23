@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import TweetPage from './pages/TweetPage/TweetPage';
 import TrendingPage from './pages/TrendingPage/TrendingPage';
 import TopUsersPage from './pages/TopUsersPage/TopUsersPage';
+import PrivateMessagePage from './pages/PrivateMessagePage/PrivateMessagePage';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/profile/messages" element={<PrivateMessagePage />} />
         <Route path="/tweet/:id" element={<TweetPage />} />
         <Route path="/tops" element={<TopUsersPage />} />
         <Route path="/trendings" element={<TrendingPage />} />

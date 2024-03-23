@@ -5,16 +5,17 @@ import TopsFollowersComponent from '../../components/TopsFollowersComponent/Tops
 import TopsFollowingsComponent from '../../components/TopFollowingsComponent/TopFollowingsComponent';
 import TopsTweetsComponent from '../../components/TopsTweetsComponen/TopsTweetsComponen';
 import TopsLikesComponent from '../../components/TopsLikesComponent/TopsLikesComponent';
+import useTops from '../../hooks/useTops';
+import ProgressLoader from '../../components/ProgressLoader/ProgressLoader';
 
 export default function TopUsersPage() {
+  const { getTops, loader } = useTops();
   const [topUsers, setTopUsers] = useState([]);
 
   useEffect(() => {
     const getTopUsers = async () => {
-      const response = await fetch(`${APIUrl}/users/users/tops`);
-      const data = await response.json();
-
-      setTopUsers(data);
+      const response = await getTops();
+      setTopUsers(response);
     };
 
     getTopUsers();
@@ -22,6 +23,7 @@ export default function TopUsersPage() {
 
   return (
     <div className="w-full flex flex-col gap-10 justify-center items-center p-10">
+      {loader && <ProgressLoader />}
       {topUsers && <TopsTweetsComponent list={topUsers.topTweets} />}
       {topUsers && <TopsFollowersComponent list={topUsers.topFollowers} />}
       {topUsers && <TopsFollowingsComponent list={topUsers.topFollowings} />}

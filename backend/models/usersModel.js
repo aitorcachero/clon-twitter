@@ -7,6 +7,12 @@ export default function usersModel() {
         `SELECT id, username, name, surname, photo, description, createdAt FROM users WHERE id = ?;`,
         [id]
       );
+
+      const [privateMessages] = await db.query(
+        `SELECT P.message_id, P.title, P.text, P.createdAt, P.read, U.username AS from_username, U.photo  FROM private_messages P JOIN users U ON P.from_user = U.id WHERE to_user = ? ORDER BY P.read = 0  DESC, P.createdAt DESC;`,
+        [id]
+      );
+
       const [arrayOfFollows] = await db.query(
         `SELECT followed_id FROM followers WHERE follower_id = ?`,
         [id]
@@ -23,6 +29,8 @@ export default function usersModel() {
       user[0].arrayOfTweetLikes = arrayOfLikes
         .map((x) => Object.values(x))
         .flat();
+      user[0].privateMessages = privateMessages;
+
       return user;
     } catch (error) {
       console.log(error);
@@ -45,7 +53,8 @@ export default function usersModel() {
       );
       user[0].arrayOfFollows = follows.map((x) => Object.values(x)).flat();
       user[0].arrayOfFollowers = followers.map((x) => Object.values(x)).flat();
-      return user;
+      const { password, email, ...rest } = user[0];
+      return rest;
     } catch (error) {
       console.log(error);
     }
@@ -146,7 +155,30 @@ export default function usersModel() {
     }
   };
 
-  // SELECT T.user_id, COUNT(T.user_id) AS tweets, U.username  FROM tweets T JOIN users U ON T.user_id = U.id GROUP BY user_id ORDER BY tweets DESC LIMIT 3
+  const sendMessage = async (from, to, title, text) => {
+    try {
+      const [result] = await db.query(
+        `INSERT INTO private_messages (from_user, to_user, title, text) VALUES (?,?,?,?)`,
+        [from, to, title, text]
+      );
+
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateMessagePrivate = async (id) => {
+    try {
+      const [result] = await db.query(
+        'UPDATE private_messages SET `read` = 1 WHERE message_id = ?',
+        [id]
+      );
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return {
     getUserById,
@@ -157,5 +189,7 @@ export default function usersModel() {
     getFollowers,
     getFollows,
     getTopUsers,
+    sendMessage,
+    updateMessagePrivate,
   };
 }

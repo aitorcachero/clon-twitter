@@ -110,7 +110,7 @@ export default function usersController() {
   const getUserByUsername = async (req, res) => {
     const { user } = req.params;
     try {
-      const [getUser] = await usersModel().getUserByUsername(user);
+      const getUser = await usersModel().getUserByUsername(user);
 
       const getTweets = await tweetsModel().getTweets(getUser.id);
 
@@ -153,6 +153,33 @@ export default function usersController() {
     }
   };
 
+  const sendMessage = async (req, res) => {
+    const { title, text, to } = req.body;
+    const from = req.user;
+    try {
+      const sendMessage = await usersModel().sendMessage(from, to, title, text);
+      res.send({
+        status: 'ok',
+        data: sendMessage,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateMessagePrivate = async (req, res) => {
+    const { id } = req.body;
+    try {
+      const updateMessage = await usersModel().updateMessagePrivate(id);
+      res.send({
+        status: 'ok',
+        data: updateMessage,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     createUser,
     authLoginUser,
@@ -160,5 +187,7 @@ export default function usersController() {
     getUserByUsername,
     deleteUser,
     getTopUsers,
+    sendMessage,
+    updateMessagePrivate,
   };
 }

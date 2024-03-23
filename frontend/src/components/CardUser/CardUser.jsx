@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import logoutImg from '../../assets/icons/logout-icon.svg';
+import iconLetter from '../../assets/icons/letter.svg';
 
 import formatDate from '../../utils/formatDate';
 import CardTwitter from '../CardTwitter/CardTwitter';
@@ -11,12 +12,14 @@ import { followUserService } from '../../services/fetchData';
 import { useNavigate } from 'react-router-dom';
 import FollowsComponent from '../FollowsComponent/FollowsComponent';
 import FollowersComponent from '../FollowersComponent/FollowersComponent';
+import WritePrivateMessage from '../WritePrivateMessage/WritePrivateMessage';
 
 export default function CardUser({ fullUser }) {
   const navigate = useNavigate();
   const { authUser, authToken, authLogout } = useAuth();
 
   const [render, setRender] = useState('tweets');
+  const [openPrivateMessage, setOpenPrivateMessage] = useState(false);
 
   const { user, tweets, following, followers } = fullUser;
 
@@ -49,17 +52,30 @@ export default function CardUser({ fullUser }) {
 
   return (
     <div className="flex flex-col w-full justify-center items-center ">
-      {user && (
+      {openPrivateMessage && (
+        <WritePrivateMessage
+          user={fullUser.user}
+          close={() => setOpenPrivateMessage(false)}
+        />
+      )}
+      {user && !openPrivateMessage && (
         <article
-          className="border min-w-[300px] border-slate-700 rounded-xl bg-zinc-900 p-6 w-full md:w-[500px] flex flex-col justify-between gap-2 my-4 relative"
+          className="border min-w-[300px] border-slate-700 rounded-xl bg-zinc-900 p-6 w-full md:w-[500px] flex flex-col justify-between gap-2 my-4 relative z-1"
           style={{
             background: 'linear-gradient(71deg, #080509, #1a171c, #080509)',
             backgroundClip: 'padding-box',
           }}
         >
           <header className="flex flex-col justify-center items-center">
-            <div className="flex flex-row justify-between items-end w-full">
+            <div className="flex flex-row justify-between items-center w-full">
               <img src={defaultIconUser} width={50} />
+              {authUser && authUser?.id !== fullUser?.user.id && (
+                <img
+                  src={iconLetter}
+                  className="w-12 hover:cursor-pointer"
+                  onClick={() => setOpenPrivateMessage(!openPrivateMessage)}
+                />
+              )}
               {authUser?.id === fullUser?.user.id && (
                 <button
                   className={`rounded-lg border border-blue-600 bg-[#040A1D] px-4 py-2 font-semibold text-slate-200`}

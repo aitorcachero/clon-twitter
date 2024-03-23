@@ -12,7 +12,7 @@ async function initDb() {
   try {
     console.log(FgLightYellow, '---Eliminado tablas---');
     await db.query(
-      'DROP TABLE IF EXISTS users, tweets, followers, likes, comments'
+      'DROP TABLE IF EXISTS users, tweets, followers, likes, comments, private_messages;'
     );
     console.log(FgLightGreen, 'Tablas eliminadas con éxito');
   } catch (error) {
@@ -99,6 +99,16 @@ async function initDb() {
     createdAt TIMESTAMP NOT NULL DEFAULT (NOW()),
     FOREIGN KEY(tweet_id) REFERENCES tweets(tweet_id));
     `);
+    console.log(FgLightGreen, 'Tablas de comentarios creada con éxito');
+  } catch (error) {
+    console.log(FgLightRed, 'Error al crear la tabla de comentarios', error);
+  }
+
+  try {
+    console.log(FgLightMagenta, '---Creando tabla de mesanjes privados---');
+    await db.query(
+      'CREATE TABLE private_messages (message_id INT AUTO_INCREMENT PRIMARY KEY, from_user INT NOT NULL, to_user INT NOT NULL, title VARCHAR(60) NOT NULL, `text` VARCHAR(280) NOT NULL, createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, `read` BOOL DEFAULT FALSE, FOREIGN KEY (to_user) REFERENCES users(id))'
+    );
     console.log(FgLightGreen, 'Tablas de comentarios creada con éxito');
   } catch (error) {
     console.log(FgLightRed, 'Error al crear la tabla de comentarios', error);

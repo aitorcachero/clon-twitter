@@ -9,6 +9,8 @@ router.get('/users/tops', usersController().getTopUsers);
 router.get('/:user', usersController().getUserByUsername);
 router.post('/', usersController().createUser);
 router.post('/login', usersController().loginUser);
+router.post('/message', authUser, usersController().sendMessage);
+router.put('/message', authUser, usersController().updateMessagePrivate);
 router.delete('/', usersController().deleteUser);
 
 export default router;

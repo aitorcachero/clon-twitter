@@ -102,6 +102,7 @@ export const AuthProvider = ({ children }) => {
         authToken,
         authUser,
         authLogout,
+        setAuthUser,
         // toastError,
         // toastSuccess,
         // navigate,
