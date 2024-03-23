@@ -22,7 +22,7 @@ export default function TopsLikesComponent({ list }) {
       {list && list.length > 0 && (
         <div className="w-[350px] md:w-[500px] border-2 border-blue-900 rounded-lg p-10 shadow-black shadow-xl bg-blue-950">
           <div className="w-full rounded-lg bg-black p-4 mb-4">
-            <h2 className="text-center">TOP SEGUIDORES</h2>
+            <h2 className="text-center">TOP CORAZONES</h2>
           </div>
           {list.map((item, i) => (
             <div
