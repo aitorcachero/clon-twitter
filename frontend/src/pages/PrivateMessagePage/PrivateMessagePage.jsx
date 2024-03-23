@@ -11,7 +11,7 @@ export default function PrivateMessagePage() {
         </h2>
         {authUser && (
           <div
-            className="w-[500px] border-slate-700 rounded-xl bg-zinc-900 mx-auto px-3 min-h-sceen  shadow-black shadow-xl mb-5"
+            className="w-[350px] md:w-[500px] border-slate-700 rounded-xl bg-zinc-900 mx-auto px-3 min-h-sceen  shadow-black shadow-xl mb-5"
             style={{
               background: 'linear-gradient(71deg, #080509, #1a171c, #080509)',
               backgroundClip: 'padding-box',
