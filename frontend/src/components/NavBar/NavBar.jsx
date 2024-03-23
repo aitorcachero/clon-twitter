@@ -44,7 +44,7 @@ export default function NavBar() {
               key={index}
               className="text-white text-sm md:text-base z-40 w-16 md:w-full"
             >
-              <div className="hover:bg-slate-300 hover:opacity-65   hover:text-black rounded-md w-full h-10 flex justify-center items-center  transition-all">
+              <div className="hover:bg-slate-300  hover:text-black rounded-md w-full h-10 flex justify-center items-center  transition-all">
                 {item.img && (
                   <div className="relative hover:cursor-pointer">
                     {UNREAD_MESSAGES?.length > 0 && (
