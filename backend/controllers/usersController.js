@@ -71,7 +71,8 @@ export default function usersController() {
   const loginUser = async (req, res) => {
     try {
       const { username, password } = req.body;
-      const [getUser] = await usersModel().getUserByUsername(username);
+      const getUser = await usersModel().getUserByUsername(username);
+
       if (getUser?.length === 0 || !getUser) {
         res.send({
           status: 'error',

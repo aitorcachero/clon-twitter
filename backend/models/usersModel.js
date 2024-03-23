@@ -53,8 +53,7 @@ export default function usersModel() {
       );
       user[0].arrayOfFollows = follows.map((x) => Object.values(x)).flat();
       user[0].arrayOfFollowers = followers.map((x) => Object.values(x)).flat();
-      const { password, email, ...rest } = user[0];
-      return rest;
+      return user[0];
     } catch (error) {
       console.log(error);
     }
