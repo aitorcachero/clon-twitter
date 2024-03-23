@@ -60,7 +60,7 @@ export default function CardUser({ fullUser }) {
       )}
       {user && !openPrivateMessage && (
         <article
-          className="border min-w-[300px] border-slate-700 rounded-xl bg-zinc-900 p-6 w-full md:w-[500px] flex flex-col justify-between gap-2 my-4 relative z-1"
+          className="border min-w-[300px] border-slate-700 rounded-xl bg-zinc-900 p-6 w-full md:w-[500px] flex flex-col justify-between gap-2 my-4 relative z-1  shadow-black shadow-xl"
           style={{
             background: 'linear-gradient(71deg, #080509, #1a171c, #080509)',
             backgroundClip: 'padding-box',

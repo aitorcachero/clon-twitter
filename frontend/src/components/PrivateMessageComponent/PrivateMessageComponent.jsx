@@ -5,7 +5,7 @@ import useUsers from '../../hooks/useUsers';
 
 export default function PrivateMessageComponent({ message }) {
   const { setAuthUser, authUser } = useAuth();
-  const { updateMessagePrivate } = useUsers();
+  const { updateMessagePrivate, deleteMessagePrivate } = useUsers();
 
   const handleOpen = async () => {
     try {
@@ -24,13 +24,23 @@ export default function PrivateMessageComponent({ message }) {
     }));
   };
 
-  const handleDelete = () => {
-    console.log('delete');
+  const handleDelete = async () => {
+    try {
+      const deleteMessage = await deleteMessagePrivate(message.message_id);
+    } catch (error) {
+      console.log(error);
+    }
+    setAuthUser((prevState) => ({
+      ...prevState,
+      privateMessages: prevState.privateMessages.filter(
+        (msg) => msg.message_id !== message.message_id
+      ),
+    }));
   };
-  console.log({ message });
+
   return (
     <div className="py-5" onClick={handleOpen}>
-      <details className="group bg-blue-950">
+      <details className="group ">
         <summary className="flex flex-col justify-center items-start font-medium cursor-pointer list-none relative">
           {message?.read === 0 && (
             <div className="absolute top-0 right-4 text-green-500 rounded-full px-[5px] py-[5px] h-5 flex justify-center items-center ">
@@ -60,7 +70,7 @@ export default function PrivateMessageComponent({ message }) {
             </svg>
           </span>
         </summary>
-        <div className="bg-slate-900 rounded p-3">
+        <div className="bg-slate-800 rounded p-3 mt-2">
           <p className="text-neutral-200 group-open:animate-fadeIn ">
             {message?.text}
           </p>
@@ -68,7 +78,7 @@ export default function PrivateMessageComponent({ message }) {
         <div className="w-full flex justify-center items-center mt-1">
           <img
             src={trashIcon}
-            className="w-8 opacity-80 mt-4"
+            className="w-8 opacity-80 mt-4 hover:cursor-pointer"
             onClick={handleDelete}
           />
         </div>

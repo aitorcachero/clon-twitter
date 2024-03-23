@@ -180,6 +180,18 @@ export default function usersModel() {
     }
   };
 
+  const deleteMessagePrivate = async (id) => {
+    try {
+      const [result] = await db.query(
+        'DELETE FROM private_messages WHERE message_id = ?',
+        [id]
+      );
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     getUserById,
     getUserByUsername,
@@ -191,5 +203,6 @@ export default function usersModel() {
     getTopUsers,
     sendMessage,
     updateMessagePrivate,
+    deleteMessagePrivate,
   };
 }

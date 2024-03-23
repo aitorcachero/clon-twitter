@@ -180,6 +180,19 @@ export default function usersController() {
     }
   };
 
+  const deleteMessagePrivate = async (req, res) => {
+    const { id } = req.body;
+    try {
+      const deleteMessage = await usersModel().deleteMessagePrivate(id);
+      res.send({
+        status: 'ok',
+        data: deleteMessage,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     createUser,
     authLoginUser,
@@ -189,5 +202,6 @@ export default function usersController() {
     getTopUsers,
     sendMessage,
     updateMessagePrivate,
+    deleteMessagePrivate,
   };
 }

@@ -7,6 +7,7 @@ import iconLetter from '../../assets/icons/letter.svg';
 
 export default function NavBar() {
   const { authUser, authLogout } = useAuth();
+
   const UNREAD_MESSAGES = authUser?.privateMessages.filter(
     (message) => !message.read
   );

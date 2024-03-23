@@ -11,6 +11,7 @@ router.post('/', usersController().createUser);
 router.post('/login', usersController().loginUser);
 router.post('/message', authUser, usersController().sendMessage);
 router.put('/message', authUser, usersController().updateMessagePrivate);
+router.delete('/message', authUser, usersController().deleteMessagePrivate);
 router.delete('/', usersController().deleteUser);
 
 export default router;

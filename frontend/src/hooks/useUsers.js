@@ -66,5 +66,33 @@ export default function useUsers() {
     }
   };
 
-  return { getUserInfo, loader, sendMessage, updateMessagePrivate };
+  const deleteMessagePrivate = async (message_id) => {
+    try {
+      setLoader(true);
+      const res = await fetch(`${APIUrl}/users/message`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: authToken,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: message_id }),
+      });
+
+      const body = await res.json();
+
+      return body;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoader(false);
+    }
+  };
+
+  return {
+    getUserInfo,
+    loader,
+    sendMessage,
+    updateMessagePrivate,
+    deleteMessagePrivate,
+  };
 }
