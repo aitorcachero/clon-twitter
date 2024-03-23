@@ -21,7 +21,7 @@ export default function TweetPage() {
       {authToken && <WriteComment id={id} />}
       {comments && comments.length > 0 && (
         <>
-          <div className="border-b-[1px] w-[500px] my-10"></div>
+          <div className="border-b-[1px] w-[350px] md:w-[500px] my-10"></div>
           {comments.map((tweet, i) => {
             return <CommentCard tweet={tweet} key={tweet.id} />;
           })}

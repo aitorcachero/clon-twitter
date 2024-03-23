@@ -51,7 +51,7 @@ export default function WritePrivateMessage({ user, close }) {
         return;
       }
     } catch (error) {
-      console.log;
+      console.log(error);
     }
   };
   return (

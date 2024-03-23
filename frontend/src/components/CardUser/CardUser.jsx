@@ -60,7 +60,7 @@ export default function CardUser({ fullUser }) {
       )}
       {user && !openPrivateMessage && (
         <article
-          className="border min-w-[300px] border-slate-700 rounded-xl bg-zinc-900 p-6 w-full md:w-[500px] flex flex-col justify-between gap-2 my-4 relative z-1  shadow-black shadow-xl"
+          className="border w-[350px] border-slate-700 rounded-xl bg-zinc-900 p-6  md:w-[500px] flex flex-col justify-between gap-2 my-4 relative z-1  shadow-black shadow-xl"
           style={{
             background: 'linear-gradient(71deg, #080509, #1a171c, #080509)',
             backgroundClip: 'padding-box',
@@ -124,7 +124,7 @@ export default function CardUser({ fullUser }) {
               </p>
             </div>
           </section>
-          <div className="mt-4 flex flex-row items-center justify-center md:justify-between px-4">
+          <div className="mt-4 flex flex-row items-center justify-center md:justify-between px-4 gap-6">
             <div className="flex flex-col md:flex-row justify-center items-center gap-2">
               <span className="text-center ">Miembro desde: </span>
               <span className="text-orange-600 text-sm text-center">

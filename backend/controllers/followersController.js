@@ -27,8 +27,6 @@ export default function followersController() {
         user.id
       );
 
-      console.log(checkIsFollowed);
-
       if (checkIsFollowed.length === 0) {
         const follow = followersModel().followUser(idAuth, user.id);
         res.send({
