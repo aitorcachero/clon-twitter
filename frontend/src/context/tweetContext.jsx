@@ -33,12 +33,19 @@ export const TweetProvider = ({ children }) => {
       );
   }, []);
 
-  const getTweets = () => {
-    fetch(`${APIUrl}/tweets/`)
-      .then((results) => results.json())
-      .then((data) =>
-        setTweets(data.data.sort((a, b) => b.createdAt - a.createdAt))
-      );
+  const getTweets = async () => {
+    try {
+      setLoading(true);
+
+      const res = await fetch(`${APIUrl}/tweets/`);
+      const data = await res.json();
+
+      setTweets(data.data.sort((a, b) => b.createdAt - a.createdAt));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const getTweet = async (id) => {
@@ -61,6 +68,7 @@ export const TweetProvider = ({ children }) => {
         getTweet,
         getComments,
         comments,
+        loading,
 
         // toastError,
         // toastSuccess,
