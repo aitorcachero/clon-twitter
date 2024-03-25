@@ -7,7 +7,8 @@ export default function followersController() {
     const idAuth = req.user;
     const { username } = req.body;
     try {
-      const [user] = await usersModel().getUserByUsername(username);
+      const user = await usersModel().getUserByUsername(username);
+
       if (user.length === 0) {
         res.send({
           status: 'error',
