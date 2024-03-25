@@ -59,8 +59,6 @@ export default function CardUser({ fullUser }) {
     if (followService.status === 'ok') setFollow(!follow);
   };
 
-  console.log(fullUser.user.photo);
-
   return (
     <div className="flex flex-col w-full justify-center items-center ">
       {openPrivateMessage && (

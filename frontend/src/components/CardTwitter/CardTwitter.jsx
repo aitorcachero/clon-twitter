@@ -16,7 +16,6 @@ export default function CardTwitter({ tweet }) {
   const { authToken, authUser } = useAuth();
   const [likes, setLikes] = useState(tweet.like_count);
   const [likedByMe, setLikedByMe] = useState(false);
-  console.log(tweet);
 
   const navigate = useNavigate();
 
