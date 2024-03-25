@@ -231,6 +231,18 @@ export default function usersModel() {
     }
   };
 
+  const updateUserAvatar = async (id, photo) => {
+    try {
+      const [result] = await db.query(
+        'UPDATE users SET photo = ? WHERE id = ?',
+        [photo, id]
+      );
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     getUserById,
     getUserByUsername,
@@ -246,5 +258,6 @@ export default function usersModel() {
     deleteMessagePrivate,
     updateUserBio,
     updateUserPassword,
+    updateUserAvatar,
   };
 }

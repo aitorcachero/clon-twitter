@@ -4,6 +4,8 @@ import formatDate from '../../utils/formatDate';
 import userDefaulIcon from '../../assets/icons/user-default-icon.svg';
 import getRandomColor from '../../utils/getRandomColor';
 
+import { APIUrl } from '../../config';
+
 export default function CommentCard({ tweet }) {
   return (
     <article
@@ -15,7 +17,13 @@ export default function CommentCard({ tweet }) {
       }}
     >
       <header className="flex flex-row justify-start items-center gap-2">
-        <img src={userDefaulIcon} width={50} />
+        <img
+          src={
+            tweet?.photo ? `${APIUrl}/avatars/${tweet.photo}` : userDefaulIcon
+          }
+          width={50}
+          className="rounded-full"
+        />
 
         <NavLink to={`/user/${tweet.username}`}>
           <span className="text-green-600 text-lg">@{tweet.username}</span>

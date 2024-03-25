@@ -5,6 +5,7 @@ import useTweets from '../../hooks/useTweets';
 import { createTweetService } from '../../services/fetchData';
 import ButtonComponent from '../ButtonComponent/ButtonComponent';
 import { toast } from 'react-toastify';
+import { APIUrl } from '../../config';
 
 export default function WriteTweet({ tweets, setTweets }) {
   const { getTweets } = useTweets();
@@ -43,7 +44,15 @@ export default function WriteTweet({ tweets, setTweets }) {
       }}
     >
       <div className="flex flex-row justify-start items-center gap-2 px-4">
-        <img src={defaultUserIcon} width={30} />
+        <img
+          src={
+            authUser?.photo
+              ? `${APIUrl}/avatars/${authUser.photo}`
+              : userDefaulIcon
+          }
+          width={40}
+          className="rounded-full"
+        />
         <p>@{authUser.username}</p>
       </div>
       <main className="p-4">

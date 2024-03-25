@@ -7,6 +7,7 @@ const {
   MYSQL_DATABASE,
   MYSQL_PORT,
   SECRET,
+  UPLOADS_DIR,
 } = process.env;
 
 export {
@@ -16,4 +17,5 @@ export {
   MYSQL_DATABASE,
   MYSQL_PORT,
   SECRET,
+  UPLOADS_DIR,
 };

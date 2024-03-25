@@ -16,7 +16,8 @@ export default function tweetsModel() {
        users.id,
        users.username,
        users.name,
-       users.surname
+       users.surname,
+       users.photo
 FROM tweets
 INNER JOIN users ON tweets.user_id = users.id
 LEFT JOIN (
@@ -113,7 +114,8 @@ ORDER BY tweets.createdAt DESC;`,
        C.createdAt,
        U.username,
        U.name,
-       U.surname
+       U.surname,
+        U.photo
 FROM comments C
 INNER JOIN users U ON C.user_id = U.id
 WHERE C.tweet_id = ?

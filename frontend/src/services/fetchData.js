@@ -174,6 +174,20 @@ const updatePasswordService = async (oldPassword, newPassword, token) => {
   return body;
 };
 
+const updateAvatarService = async (avatar, token) => {
+  const res = await fetch(`${APIUrl}/users/avatar`, {
+    method: 'PUT',
+    headers: {
+      Authorization: token,
+    },
+    body: avatar,
+  });
+
+  const body = await res.json();
+
+  return body;
+};
+
 export {
   getTweetService,
   getUserProfileService,
@@ -186,4 +200,5 @@ export {
   deleteUserService,
   updateBioService,
   updatePasswordService,
+  updateAvatarService,
 };

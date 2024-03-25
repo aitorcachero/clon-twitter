@@ -1,14 +1,26 @@
 import express from 'express';
 import cors from 'cors';
+import morgan from 'morgan';
+import fileUpload from 'express-fileupload';
 
 // Create an Express app and listen for incoming requests on port 3000
 const app = express();
 const router = express.Router();
 const PORT = process.env.PORT || 3000;
 
-// Use middleware to parse incoming requests with JSON and URL-encoded payloads
+// Middlewares
+// Deserializa un body en formato "raw" creando la propiedad "body" en el objeto "request".
 app.use(express.json());
+// Evita problemas con las CORS cuando intentamos conectar el cliente con el servidor
 app.use(cors());
+// Muestra por consola información de la petición entrante
+app.use(morgan('common'));
+// Middleware que indica a Express cual es el directorio de ficheros estáticos.
+// app.use(express.static(UPLOADS_DIR));
+app.use(express.static('./uploads'));
+// Middleware que deserializa un body en formato "form-data" creando la propiedad "body" y
+// la propiedad "files" en el objeto "request".
+app.use(fileUpload());
 
 import usersRoutes from './routes/usersRoutes.js';
 import tweetsRoutes from './routes/tweetsRoutes.js';

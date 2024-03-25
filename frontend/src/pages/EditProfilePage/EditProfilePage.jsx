@@ -12,6 +12,7 @@ import iconLocked from '../../assets/icons/locked.svg';
 import iconUnlocked from '../../assets/icons/unlocked.svg';
 import useUsers from '../../hooks/useUsers';
 import './EditProfilePage.css';
+import { APIUrl } from '../../config';
 
 export default function EditProfilePage() {
   const { handleUpdateAvatar, handleUpdateBio, handleUpdatePassword } =
@@ -44,7 +45,7 @@ export default function EditProfilePage() {
       setBio(authUser.description || '');
       setChangeBio(authUser.description || '');
       authUser.photo
-        ? setImg(`${APIUrl}/avatars/${authUser.avatar}`)
+        ? setImg(`${APIUrl}/avatars/${authUser.photo}`)
         : setImg(defaultUserIcon);
     }
   }, [authUser]);

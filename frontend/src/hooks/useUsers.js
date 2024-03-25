@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { APIUrl } from '../config';
 import useAuth from './useAuth';
-import { updateBioService, updatePasswordService } from '../services/fetchData';
+import {
+  updateAvatarService,
+  updateBioService,
+  updatePasswordService,
+} from '../services/fetchData';
 import { toast } from 'react-toastify';
 
 export default function useUsers() {
@@ -106,9 +110,11 @@ export default function useUsers() {
   };
 
   const handleUpdateAvatar = async (avatar) => {
-    console.log(avatar);
+    const formData = new FormData();
+    formData.append('avatar', avatar);
     try {
-      // const updateAvatar = await authUpdateProfile({ avatar }, authToken);
+      const updateAvatar = await updateAvatarService(formData, authToken);
+      console.log(updateAvatar);
     } catch (error) {
       console.log(error);
     }

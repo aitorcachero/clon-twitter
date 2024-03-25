@@ -1,8 +1,16 @@
-import { comparePassword, hashPassword } from '../helpers/encrypters.js';
+import {
+  comparePassword,
+  generatePhotoName,
+  hashPassword,
+} from '../helpers/encrypters.js';
 import usersModel from '../models/usersModel.js';
 import jwt from 'jsonwebtoken';
 import { SECRET } from '../config.js';
 import tweetsModel from '../models/tweetsModel.js';
+import webp from 'webp-converter';
+import savePhoto from '../utils/savePhoto.js';
+import deletePhoto from '../utils/deletePhoto.js';
+webp.grant_permission();
 
 export default function usersController() {
   const createUser = async (req, res) => {
@@ -242,8 +250,33 @@ export default function usersController() {
   };
 
   const updateUserAvatar = async (req, res) => {
-    // const id = req.user;
-    // const { avatar } = req.body;
+    const id = req.user;
+    const avatar = req?.files?.avatar;
+
+    try {
+      let hashedName = null;
+
+      if (avatar) {
+        hashedName = generatePhotoName();
+        await savePhoto(req.files?.avatar, hashedName, 'avatars');
+      }
+
+      const [dataUser] = await usersModel().getUserById(id);
+
+      const actualPhotoName = dataUser?.photo;
+      console.log('actualPhotoName', actualPhotoName);
+      if (actualPhotoName) {
+        await deletePhoto(actualPhotoName, 'avatars');
+      }
+      await usersModel().updateUserAvatar(id, hashedName);
+      res.send({
+        status: 'ok',
+        message: 'Avatar actualizado',
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
     // try {
     //   // const updateUser = await usersModel().updateUserAvatar(id, avatar);
     //   // res.send({

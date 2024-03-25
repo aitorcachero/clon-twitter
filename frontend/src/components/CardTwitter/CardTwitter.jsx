@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 import checkTweetLikedByMe from '../../utils/checkTweetLikedByMe';
 import userDefaulIcon from '../../assets/icons/user-default-icon.svg';
+import { APIUrl } from '../../config';
 
 export default function CardTwitter({ tweet }) {
   const { authToken, authUser } = useAuth();
@@ -60,8 +61,17 @@ export default function CardTwitter({ tweet }) {
     >
       <header className="flex flex-row justify-between items-center gap-2">
         <div className="flex flex-row justify-center items-center gap-2">
-          <img src={userDefaulIcon} width={50} />
-
+          <NavLink to={`/user/${tweet.username}`}>
+            <img
+              src={
+                tweet?.photo
+                  ? `${APIUrl}/avatars/${tweet.photo}`
+                  : userDefaulIcon
+              }
+              width={50}
+              className="rounded-full hover:cursor-pointer"
+            />
+          </NavLink>
           <NavLink to={`/user/${tweet.username}`}>
             <span className="text-green-600 text-lg">@{tweet.username}</span>
           </NavLink>
