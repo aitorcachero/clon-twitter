@@ -9,7 +9,7 @@ import useAuth from '../../hooks/useAuth';
 import defaultIconUser from '../../assets/icons/user-default-icon.svg';
 
 import { followUserService } from '../../services/fetchData';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import FollowsComponent from '../FollowsComponent/FollowsComponent';
 import FollowersComponent from '../FollowersComponent/FollowersComponent';
 import WritePrivateMessage from '../WritePrivateMessage/WritePrivateMessage';
@@ -77,11 +77,13 @@ export default function CardUser({ fullUser }) {
                 />
               )}
               {authUser?.id === fullUser?.user.id && (
-                <button
-                  className={`rounded-lg border border-blue-600 bg-[#040A1D] px-4 py-2 font-semibold text-slate-200`}
-                >
-                  Editar
-                </button>
+                <NavLink to="/profile/edit">
+                  <button
+                    className={`rounded-lg border border-blue-600 bg-[#040A1D] px-4 py-2 font-semibold text-slate-200`}
+                  >
+                    Editar
+                  </button>
+                </NavLink>
               )}
             </div>
             <div className="flex flex-col justify-center items-start w-full">
@@ -125,9 +127,9 @@ export default function CardUser({ fullUser }) {
             </div>
           </section>
           <div className="mt-4 flex flex-row items-center justify-center md:justify-between px-4 gap-6">
-            <div className="flex flex-col md:flex-row justify-center items-center gap-2">
+            <div className="flex flex-col md:flex-row md:justify-center items-start md:items-center gap-2">
               <span className="text-center ">Miembro desde: </span>
-              <span className="text-orange-600 text-sm text-center">
+              <span className="text-orange-600 text-sm text-center w-24 md:w-auto">
                 {formatDate(user.createdAt)}
               </span>
             </div>

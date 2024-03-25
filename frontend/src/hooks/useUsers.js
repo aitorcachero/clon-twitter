@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { APIUrl } from '../config';
 import useAuth from './useAuth';
+import { updateBioService, updatePasswordService } from '../services/fetchData';
+import { toast } from 'react-toastify';
 
 export default function useUsers() {
-  const { authToken } = useAuth();
+  const { authToken, setAuthUser } = useAuth();
   const [loader, setLoader] = useState(false);
   const getUserInfo = async (user) => {
     try {
@@ -88,11 +90,66 @@ export default function useUsers() {
     }
   };
 
+  const handleUpdateBio = async (bio) => {
+    try {
+      const updateBio = await updateBioService(bio, authToken);
+      if (updateBio.status === 'error') {
+        toast.error(updateBio.message);
+      }
+      if (updateBio.status === 'ok') {
+        toast.success('Descripción actualizada');
+        setAuthUser((prev) => ({ ...prev, description: bio }));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleUpdateAvatar = async (e, avatar) => {
+    e.preventDefault();
+    console.log(avatar);
+    try {
+      // const updateAvatar = await authUpdateProfile({ avatar }, authToken);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleUpdatePassword = async (password, setPassword) => {
+    if (password.newPassword !== password.confirmPassword) {
+      toast.error('Las contraseñas no coinciden');
+      return;
+    }
+    try {
+      const updatePassword = await updatePasswordService(
+        password.oldPassword,
+        password.newPassword,
+        authToken
+      );
+      if (updatePassword.status === 'error') {
+        toast.error(updatePassword.message);
+      }
+      if (updatePassword.status === 'ok') {
+        toast.success(updatePassword.message);
+        setPassword({
+          oldPassword: '',
+          newPassword: '',
+          confirmPassword: '',
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     getUserInfo,
     loader,
     sendMessage,
     updateMessagePrivate,
     deleteMessagePrivate,
+    handleUpdateBio,
+    handleUpdateAvatar,
+    handleUpdatePassword,
   };
 }

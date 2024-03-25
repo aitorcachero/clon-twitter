@@ -53,6 +53,7 @@ async function initDb() {
     comments INT DEFAULT 0,
     createdAt TIMESTAMP NOT NULL DEFAULT (NOW()),
     FOREIGN KEY (user_id) REFERENCES users(id)
+    ON DELETE CASCADE
     );`);
     console.log(FgLightGreen, 'Tablas de tweets creada con éxito');
   } catch (error) {
@@ -67,6 +68,7 @@ async function initDb() {
     followed_id INT NOT NULL,
     FOREIGN KEY(follower_id) REFERENCES users(id),
     PRIMARY KEY(follower_id, followed_id));
+    ON DELETE CASCADE
     `);
     console.log(FgLightGreen, 'Tablas de followers creada con éxito');
   } catch (error) {
@@ -81,6 +83,7 @@ async function initDb() {
     user_id INT NOT NULL,
     FOREIGN KEY(tweet_id) REFERENCES tweets(tweet_id),
     PRIMARY KEY(user_id, tweet_id)
+    ON DELETE CASCADE
     );
     `);
     console.log(FgLightGreen, 'Tablas de likes creada con éxito');
@@ -98,6 +101,7 @@ async function initDb() {
     COMMENT VARCHAR(280) NOT NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT (NOW()),
     FOREIGN KEY(tweet_id) REFERENCES tweets(tweet_id));
+    ON DELETE CASCADE
     `);
     console.log(FgLightGreen, 'Tablas de comentarios creada con éxito');
   } catch (error) {
@@ -107,7 +111,7 @@ async function initDb() {
   try {
     console.log(FgLightMagenta, '---Creando tabla de mesanjes privados---');
     await db.query(
-      'CREATE TABLE private_messages (message_id INT AUTO_INCREMENT PRIMARY KEY, from_user INT NOT NULL, to_user INT NOT NULL, title VARCHAR(60) NOT NULL, `text` VARCHAR(280) NOT NULL, createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, `read` BOOL DEFAULT FALSE, FOREIGN KEY (to_user) REFERENCES users(id))'
+      'CREATE TABLE private_messages (message_id INT AUTO_INCREMENT PRIMARY KEY, from_user INT NOT NULL, to_user INT NOT NULL, title VARCHAR(60) NOT NULL, `text` VARCHAR(280) NOT NULL, createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, `read` BOOL DEFAULT FALSE, FOREIGN KEY (to_user) REFERENCES users(id)) ON DELETE CASCADE'
     );
     console.log(FgLightGreen, 'Tablas de comentarios creada con éxito');
   } catch (error) {

@@ -1,18 +1,32 @@
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import bgImage from '../../assets/bg-wave.webp';
 import Loader from '../../components/Loader/Loader';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { authLogin, loading } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const { authLogin } = useAuth();
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    document.title = 'Twitter Clon - Login';
+    if (loading) console.log('Cargando...');
+  }, [loading]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (username === '' || password === '') return;
-    authLogin(username, password);
+    try {
+      if (username === '' || password === '') return;
+      setLoading(true);
+      await authLogin(username, password);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleClear = () => {
@@ -21,15 +35,21 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-900">
-      <div className="flex justify-center h-screen">
+    <div
+      className="border-slate-700  bg-zinc-900 shadow-black shadow-xl bg-gradient-to-r from-zinc-900 via-zinc-900 to-zinc-900"
+      style={{
+        background: 'linear-gradient(71deg, #080509, #1a171c, #080509)',
+        backgroundClip: 'padding-box',
+      }}
+    >
+      <div className="flex justify-center h-screen border-slate-700  bg-zinc-900">
         <div
           className="hidden bg-cover md:block md:w-2/3"
           style={{
             backgroundImage: `url(${bgImage})`,
           }}
         >
-          <div className="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
+          <div className="flex items-center h-full px-20 border-slate-700  bg-zinc-900 shadow-black shadow-xl bg-opacity-40">
             <div>
               <h2 className="text-4xl font-bold text-white">Twitter Clon</h2>
 
@@ -40,7 +60,13 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <div className="flex items-center w-full max-w-md px-6 mx-auto md:w-2/6">
+        <div
+          className="flex items-center w-full px-6  md:px-20  md:w-2/6  shadow-black shadow-xl"
+          style={{
+            background: 'linear-gradient(71deg, #080509, #1a171c, #080509)',
+            backgroundClip: 'padding-box',
+          }}
+        >
           <div className="flex-1">
             <div className="text-center">
               <h2 className="text-4xl font-bold text-center text-gray-700 dark:text-white">
@@ -99,13 +125,13 @@ export default function LoginPage() {
                   />
                 </div>
 
-                <div className="mt-6">
-                  <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50 flex flex-row justify-center items-center relative">
-                    <p>Entrar</p>
-                    <div className="absolute w-10 h-10 right-1/4 top-1">
-                      {loading && <Loader width="30px" heigth="30px" />}
-                    </div>
+                <div className="mt-6 relative">
+                  <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50 flex flex-row justify-center items-center ">
+                    Entrar
                   </button>
+                  <div className="absolute w-10 h-10 right-1/4 top-1">
+                    {loading && <Loader width="30px" heigth="30px" />}
+                  </div>
                 </div>
               </form>
 

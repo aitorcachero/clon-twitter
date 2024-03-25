@@ -1,6 +1,6 @@
 import CardTwitter from '../../components/CardTwitter/CardTwitter';
 import useTweets from '../../hooks/useTweets';
-import LoginPage from '../LoginPage/LoginPage';
+
 import useAuth from '../../hooks/useAuth';
 import WriteTweet from '../../components/WriteTweet/WriteTweet';
 import ProgressLoader from '../../components/ProgressLoader/ProgressLoader';

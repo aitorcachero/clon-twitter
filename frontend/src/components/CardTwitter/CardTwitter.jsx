@@ -66,7 +66,7 @@ export default function CardTwitter({ tweet }) {
             <span className="text-green-600 text-lg">@{tweet.username}</span>
           </NavLink>
         </div>
-        <p className="text-orange-600 text-sm text-end">
+        <p className="text-orange-600 text-sm text-end md:w-auto w-24">
           {formatDate(tweet.createdAt)}
         </p>
       </header>

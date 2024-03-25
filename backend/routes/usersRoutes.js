@@ -11,7 +11,10 @@ router.post('/', usersController().createUser);
 router.post('/login', usersController().loginUser);
 router.post('/message', authUser, usersController().sendMessage);
 router.put('/message', authUser, usersController().updateMessagePrivate);
+router.put('/password', authUser, usersController().updateUserPassword);
+router.put('/avatar', authUser, usersController().updateUserAvatar);
+router.put('/bio', authUser, usersController().updateUserBio);
 router.delete('/message', authUser, usersController().deleteMessagePrivate);
-router.delete('/', usersController().deleteUser);
+router.delete('/:userId', authUser, usersController().deleteUser);
 
 export default router;

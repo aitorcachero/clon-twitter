@@ -38,6 +38,7 @@ export const AuthProvider = ({ children }) => {
         if (body.status === 'error') {
           // Manejamos los errores con toast.
           toast.error(body.message);
+          navigate('/');
         } else {
           setAuthUser(body.data);
         }
@@ -94,6 +95,45 @@ export const AuthProvider = ({ children }) => {
     navigate('/login');
   };
 
+  const updateUser = async (data) => {
+    const password = async (oldPassword, newPassword) => {
+      if (data.password !== data.confirmPassword) {
+        toastError('Las contraseñas no coinciden');
+        return;
+      }
+    };
+
+    const bio = async (bio) => {
+      if (bio.length > 160) {
+        toastError('La biografía no puede superar los 160 caracteres');
+        return;
+      }
+    };
+
+    const avatar = async (avatar) => {
+      //
+    };
+
+    return { password, bio, avatar };
+    // try {
+    //   setLoading(true);
+
+    //   const body = await updateUserProfileService(authToken, data);
+
+    //   if (body.status === 'error') {
+    //     toastError(body.message);
+    //     return;
+    //   } else {
+    //     toastSuccess(body.message);
+    //     setAuthUser(body.data);
+    //   }
+    // } catch (err) {
+    //   if (err.message === 'Failed to fetch') toastError('Error de conexión');
+    // } finally {
+    //   setLoading(false);
+    // }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -103,6 +143,7 @@ export const AuthProvider = ({ children }) => {
         authUser,
         authLogout,
         setAuthUser,
+        updateUser,
         // toastError,
         // toastSuccess,
         // navigate,

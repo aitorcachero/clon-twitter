@@ -8,6 +8,8 @@ export default function usersModel() {
         [id]
       );
 
+      if (user.length === 0) return [];
+
       const [privateMessages] = await db.query(
         `SELECT P.message_id, P.title, P.text, P.createdAt, P.read, U.username AS from_username, U.photo  FROM private_messages P JOIN users U ON P.from_user = U.id WHERE to_user = ? ORDER BY P.read = 0  DESC, P.createdAt DESC;`,
         [id]
@@ -42,6 +44,7 @@ export default function usersModel() {
       const [user] = await db.query(`SELECT * FROM users WHERE username = ?;`, [
         name,
       ]);
+      if (user.length === 0) return null;
       const ID = user[0].id;
       const [follows] = await db.query(
         `SELECT follower_id FROM followers WHERE follower_id = ? `,
@@ -54,6 +57,19 @@ export default function usersModel() {
       user[0].arrayOfFollows = follows.map((x) => Object.values(x)).flat();
       user[0].arrayOfFollowers = followers.map((x) => Object.values(x)).flat();
       return user[0];
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getUserPassword = async (id) => {
+    try {
+      const [result] = await db.query(
+        `SELECT password FROM users WHERE id = ?`,
+        [id]
+      );
+      const { password } = result[0];
+      return password;
     } catch (error) {
       console.log(error);
     }
@@ -191,9 +207,34 @@ export default function usersModel() {
     }
   };
 
+  const updateUserBio = async (id, bio) => {
+    try {
+      const [result] = await db.query(
+        'UPDATE users SET description = ? WHERE id = ?',
+        [bio, id]
+      );
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateUserPassword = async (id, password) => {
+    try {
+      const [result] = await db.query(
+        'UPDATE users SET password = ? WHERE id = ?',
+        [password, id]
+      );
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     getUserById,
     getUserByUsername,
+    getUserPassword,
     getUserByEmail,
     createUser,
     deleteUser,
@@ -203,5 +244,7 @@ export default function usersModel() {
     sendMessage,
     updateMessagePrivate,
     deleteMessagePrivate,
+    updateUserBio,
+    updateUserPassword,
   };
 }

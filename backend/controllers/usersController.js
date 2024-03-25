@@ -49,8 +49,10 @@ export default function usersController() {
 
   const authLoginUser = async (req, res) => {
     const id = req.user;
+
     try {
       const [getUser] = await usersModel().getUserById(id);
+
       if (getUser) {
         res.send({
           status: 'ok',
@@ -113,6 +115,14 @@ export default function usersController() {
     try {
       const getUser = await usersModel().getUserByUsername(user);
 
+      if (!getUser) {
+        res.send({
+          status: 'error',
+          message: 'No se encuentra el usuario',
+        });
+        return;
+      }
+
       const getTweets = await tweetsModel().getTweets(getUser.id);
 
       const getFollowers = await usersModel().getFollowers(getUser.id);
@@ -131,14 +141,27 @@ export default function usersController() {
   };
 
   const deleteUser = async (req, res) => {
-    const { id } = req.body;
+    const id = req.user;
+    const { userId } = req.params;
+    const userIdNumber = +userId;
+
+    if (id !== userIdNumber) {
+      res.send({
+        status: 'error',
+        message: 'No puedes eliminar a otro usuario',
+      });
+      return;
+    }
     try {
       const deleteUser = await usersModel().deleteUser(id);
 
       if (deleteUser.affectedRows === 1) {
-        res.send('Usuario eliminado correctamente');
+        res.send({ status: 'ok', message: 'Usuario eliminado correctamente' });
       } else {
-        res.send('No existe el usuario');
+        res.send({
+          status: 'error',
+          message: 'No se ha podido eliminar el usuario',
+        });
       }
     } catch (error) {
       console.log(error);
@@ -194,6 +217,59 @@ export default function usersController() {
     }
   };
 
+  const updateUserPassword = async (req, res) => {
+    const id = req.user;
+    const getUserPassword = await usersModel().getUserPassword(id);
+    const { oldPassword, newPassword } = req.body;
+    const checkPassword = await comparePassword(oldPassword, getUserPassword);
+    if (!checkPassword) {
+      res.send({
+        status: 'error',
+        message: 'La contraseña antigua no coincide',
+      });
+      return;
+    }
+    const encryptPassword = await hashPassword(newPassword);
+    try {
+      await usersModel().updateUserPassword(id, encryptPassword);
+      res.send({
+        status: 'ok',
+        message: 'Contraseña actualizada correctamente',
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateUserAvatar = async (req, res) => {
+    // const id = req.user;
+    // const { avatar } = req.body;
+    // try {
+    //   // const updateUser = await usersModel().updateUserAvatar(id, avatar);
+    //   // res.send({
+    //   //   status: 'ok',
+    //   //   data: updateUser,
+    //   // });
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  };
+
+  const updateUserBio = async (req, res) => {
+    const id = req.user;
+    const { bio } = req.body;
+
+    try {
+      await usersModel().updateUserBio(id, bio);
+      res.send({
+        status: 'ok',
+        data: bio,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     createUser,
     authLoginUser,
@@ -204,5 +280,8 @@ export default function usersController() {
     sendMessage,
     updateMessagePrivate,
     deleteMessagePrivate,
+    updateUserPassword,
+    updateUserAvatar,
+    updateUserBio,
   };
 }

@@ -1,0 +1,8 @@
+.btn-hover {
+  background: linear-gradient(141deg, #080509, #1a171c, #080509);
+  background-clip: padding-box;
+}
+.btn-hover:hover {
+  background: linear-gradient(71deg, #080509, #1a171c, #080509);
+  background-clip: padding-box;
+}

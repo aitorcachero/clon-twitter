@@ -65,15 +65,15 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-900">
-      <div className="flex flex-row-reverse justify-center h-screen">
+    <div className="border-slate-700  bg-zinc-900 shadow-black shadow-xl bg-gradient-to-r from-zinc-900 via-zinc-900 to-zinc-900">
+      <div className="flex flex-row-reverse justify-center h-screen border-slate-700  bg-zinc-900">
         <div
-          className="hidden bg-cover md:block md:w-2/3"
+          className="hidden bg-cover md:block md:w-2/3 border-slate-700  bg-zinc-900"
           style={{
             backgroundImage: `url(${bgImage})`,
           }}
         >
-          <div className="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
+          <div className="flex items-center h-full px-20 border-slate-700  bg-zinc-900 bg-opacity-40 shadow-black shadow-xl">
             <div>
               <h2 className="text-4xl font-bold text-white">Twitter Clon</h2>
 
@@ -84,7 +84,13 @@ export default function RegisterPage() {
           </div>
         </div>
 
-        <div className="flex items-start  w-full max-w-md px-6 mx-auto md:w-2/6">
+        <div
+          className="flex items-center w-full px-6  md:px-20  md:w-2/6  shadow-black shadow-xl"
+          style={{
+            background: 'linear-gradient(71deg, #080509, #1a171c, #080509)',
+            backgroundClip: 'padding-box',
+          }}
+        >
           <div className="flex-1">
             <div className="text-center">
               <h2 className="text-4xl font-bold text-center text-gray-700 dark:text-white">

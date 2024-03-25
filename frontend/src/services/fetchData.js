@@ -131,6 +131,49 @@ const followUserService = async (username, token) => {
   return body;
 };
 
+const deleteUserService = async (id, token) => {
+  const res = await fetch(`${APIUrl}/users/${id}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: token,
+    },
+  });
+
+  const body = await res.json();
+
+  return body;
+};
+
+const updateBioService = async (bio, token) => {
+  const res = await fetch(`${APIUrl}/users/bio`, {
+    method: 'PUT',
+    headers: {
+      Authorization: token,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ bio }),
+  });
+
+  const body = await res.json();
+
+  return body;
+};
+
+const updatePasswordService = async (oldPassword, newPassword, token) => {
+  const res = await fetch(`${APIUrl}/users/password`, {
+    method: 'PUT',
+    headers: {
+      Authorization: token,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ oldPassword, newPassword }),
+  });
+
+  const body = await res.json();
+
+  return body;
+};
+
 export {
   getTweetService,
   getUserProfileService,
@@ -140,4 +183,7 @@ export {
   registerUserService,
   likesService,
   followUserService,
+  deleteUserService,
+  updateBioService,
+  updatePasswordService,
 };
