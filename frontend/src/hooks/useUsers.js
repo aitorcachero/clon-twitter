@@ -105,8 +105,7 @@ export default function useUsers() {
     }
   };
 
-  const handleUpdateAvatar = async (e, avatar) => {
-    e.preventDefault();
+  const handleUpdateAvatar = async (avatar) => {
     console.log(avatar);
     try {
       // const updateAvatar = await authUpdateProfile({ avatar }, authToken);

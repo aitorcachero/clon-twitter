@@ -136,7 +136,7 @@ export default function EditProfilePage() {
             <button
               className="block border border-slate-700 bg-zinc-900 text-white rounded-lg p-4 mt-2 shadow-black shadow-xl btn-hover"
               // style="display:block;width:130px; height:30px;"
-              onClick={(e) => handleUpdateAvatar(e, avatar)}
+              onClick={() => handleUpdateAvatar(avatar)}
             >
               Actualizar avatar
             </button>
