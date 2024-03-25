@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import defaultUserIcon from '../../assets/icons/user-default-icon.svg';
+import userDefaultIcon from '../../assets/icons/user-default-icon.svg';
 import useAuth from '../../hooks/useAuth';
 import useTweets from '../../hooks/useTweets';
 import { createTweetService } from '../../services/fetchData';
@@ -48,7 +48,7 @@ export default function WriteTweet({ tweets, setTweets }) {
           src={
             authUser?.photo
               ? `${APIUrl}/avatars/${authUser.photo}`
-              : userDefaulIcon
+              : userDefaultIcon
           }
           width={40}
           className="rounded-full"
