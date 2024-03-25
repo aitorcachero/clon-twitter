@@ -56,7 +56,8 @@ ORDER BY tweets.createdAt DESC;`
        users.id,
        users.username,
        users.name,
-       users.surname
+       users.surname,
+       users.photo
 FROM tweets
 INNER JOIN users ON tweets.user_id = users.id
 LEFT JOIN (

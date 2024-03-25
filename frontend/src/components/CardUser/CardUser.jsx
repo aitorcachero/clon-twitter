@@ -25,6 +25,7 @@ export default function CardUser({ fullUser }) {
   const { user, tweets, following, followers } = fullUser;
 
   const [follow, setFollow] = useState(false);
+  const [avatar, setAvatar] = useState(null);
   const buttonFollow = follow ? 'Siguiendo' : 'Seguir';
 
   useEffect(() => {
@@ -33,10 +34,17 @@ export default function CardUser({ fullUser }) {
       const AUTH_USER_ID = authUser?.id;
       const ARRAY_FOLLOWS = authUser?.arrayOfFollows;
       const result = ARRAY_FOLLOWS.includes(USER_ID);
+
       setFollow(result);
     };
     if (authUser) checkFollow();
   }, [authUser]);
+
+  useEffect(() => {
+    if (fullUser) {
+      setAvatar(fullUser?.user.photo);
+    }
+  }, [fullUser]);
 
   const handleFollow = async (e) => {
     e.preventDefault();
@@ -72,11 +80,7 @@ export default function CardUser({ fullUser }) {
           <header className="flex flex-col justify-center items-center">
             <div className="flex flex-row justify-between items-center w-full">
               <img
-                src={
-                  fullUser?.user.avatar
-                    ? `${APIUrl}/avatars/${fullUser.user.avatar}`
-                    : defaultIconUser
-                }
+                src={avatar ? `${APIUrl}/avatars/${avatar}` : defaultIconUser}
                 width={50}
                 className="rounded-full overflow-hidden"
               />
