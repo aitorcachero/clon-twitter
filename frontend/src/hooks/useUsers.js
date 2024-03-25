@@ -114,7 +114,13 @@ export default function useUsers() {
     formData.append('avatar', avatar);
     try {
       const updateAvatar = await updateAvatarService(formData, authToken);
-      console.log(updateAvatar);
+      if (updateAvatar.status === 'error') {
+        toast.error(updateAvatar.message);
+      }
+      if (updateAvatar.status === 'ok') {
+        toast.success('Avatar actualizado');
+        setAuthUser((prev) => ({ ...prev, photo: updateAvatar.photo }));
+      }
     } catch (error) {
       console.log(error);
     }

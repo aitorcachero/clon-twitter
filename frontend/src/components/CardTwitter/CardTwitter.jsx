@@ -68,8 +68,7 @@ export default function CardTwitter({ tweet }) {
                   ? `${APIUrl}/avatars/${tweet.photo}`
                   : userDefaulIcon
               }
-              width={50}
-              className="rounded-full hover:cursor-pointer"
+              className="w-12 h-12 rounded-full hover:cursor-pointer object-cover"
             />
           </NavLink>
           <NavLink to={`/user/${tweet.username}`}>

@@ -51,6 +51,8 @@ export default function CardUser({ fullUser }) {
     if (followService.status === 'ok') setFollow(!follow);
   };
 
+  console.log(fullUser.user.photo);
+
   return (
     <div className="flex flex-col w-full justify-center items-center ">
       {openPrivateMessage && (
@@ -71,7 +73,7 @@ export default function CardUser({ fullUser }) {
             <div className="flex flex-row justify-between items-center w-full">
               <img
                 src={
-                  fullUser.user.avatar
+                  fullUser?.user.avatar
                     ? `${APIUrl}/avatars/${fullUser.user.avatar}`
                     : defaultIconUser
                 }
