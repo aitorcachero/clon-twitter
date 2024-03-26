@@ -82,9 +82,7 @@ export default function formatDate(date) {
     ' a las ' +
     hours +
     ':' +
-    minutes +
-    ':' +
-    seconds;
+    minutes;
 
   return dateTimeFormated;
 }

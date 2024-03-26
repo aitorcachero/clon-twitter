@@ -50,8 +50,7 @@ export default function WriteTweet({ tweets, setTweets }) {
               ? `${APIUrl}/avatars/${authUser.photo}`
               : userDefaultIcon
           }
-          width={40}
-          className="rounded-full"
+          className="rounded-full w-10 h-10 md:w-12 md:h-12 object-cover"
         />
         <p>@{authUser.username}</p>
       </div>
@@ -81,7 +80,6 @@ export default function WriteTweet({ tweets, setTweets }) {
           {errorText}
         </p>
 
-        {/* <button onClick={handleSubmit}>Postear</button> */}
         <ButtonComponent text="Postear" click={(e) => handleSubmit(e)} />
       </div>
     </article>

@@ -61,20 +61,22 @@ export default function CardTwitter({ tweet }) {
       }}
     >
       <header className="flex flex-row justify-between items-center gap-2">
-        <div className="flex flex-row justify-center items-center gap-2">
-          <NavLink to={`/user/${tweet.username}`}>
-            <img
-              src={
-                tweet?.photo
-                  ? `${APIUrl}/avatars/${tweet.photo}`
-                  : userDefaulIcon
-              }
-              className="w-12 h-12 rounded-full hover:cursor-pointer object-cover"
-            />
-          </NavLink>
-          <NavLink to={`/user/${tweet.username}`}>
-            <span className="text-green-600 text-lg">@{tweet.username}</span>
-          </NavLink>
+        <div className="flex flex-row justify-center items-center ">
+          <div className="flex flex-col md:flex-row md:justify-center md:items-center gap-2">
+            <NavLink to={`/user/${tweet.username}`}>
+              <img
+                src={
+                  tweet?.photo
+                    ? `${APIUrl}/avatars/${tweet.photo}`
+                    : userDefaulIcon
+                }
+                className="w-12 h-12 rounded-full hover:cursor-pointer object-cover"
+              />
+            </NavLink>
+            <NavLink to={`/user/${tweet.username}`}>
+              <span className="text-green-600 text-lg">@{tweet.username}</span>
+            </NavLink>
+          </div>
         </div>
         <p className="text-orange-600 text-sm text-end md:w-auto w-24">
           {formatDate(tweet.createdAt)}
@@ -86,7 +88,7 @@ export default function CardTwitter({ tweet }) {
             return (
               <NavLink
                 to={`/user/${word.slice(1)}`}
-                className="font-medium text-white hover:underline"
+                className="font-medium text-blue-500 hover:underline"
                 key={i}
               >
                 {word + ' '}
@@ -100,7 +102,7 @@ export default function CardTwitter({ tweet }) {
                 href={word}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-medium text-white hover:underline"
+                className=" text-slate-300 hover:underline"
               >
                 {word}
               </a>
