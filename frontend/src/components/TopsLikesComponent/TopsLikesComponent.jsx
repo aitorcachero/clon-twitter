@@ -20,7 +20,13 @@ export default function TopsLikesComponent({ list }) {
   return (
     <>
       {list && list.length > 0 && (
-        <div className="w-[350px] md:w-[500px] border-2 border-blue-900 rounded-lg p-10 shadow-black shadow-xl bg-blue-950">
+        <div
+          className="border w-[350px] border-slate-700 rounded-xl bg-zinc-900 p-10  md:w-[500px] flex flex-col justify-between gap-2 my-2  shadow-black shadow-xl"
+          style={{
+            background: 'linear-gradient(71deg, #080509, #1a171c, #080509)',
+            backgroundClip: 'padding-box',
+          }}
+        >
           <div className="w-full rounded-lg bg-black p-4 mb-4">
             <h2 className="text-center">TOP LIKES</h2>
           </div>

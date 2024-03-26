@@ -15,17 +15,11 @@ export default function EditProfilePage() {
         }}
       >
         <EditAvatarComponent />
-
         <div className="w-full border-b-[1px] border-white my-8" />
         <EditBioComponent />
-
         <div className="w-full border-b-[1px] border-white my-6" />
-
         <EditPasswordComponent />
-
         <div className="w-full border-b-[1px] border-white my-6" />
-
-        {/* Aquí va el componente para eliminar un user */}
         <DeleteUserComponent />
       </article>
     </div>

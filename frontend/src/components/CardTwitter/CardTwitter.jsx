@@ -88,7 +88,7 @@ export default function CardTwitter({ tweet }) {
             return (
               <NavLink
                 to={`/user/${word.slice(1)}`}
-                className="font-medium text-blue-500 hover:underline"
+                className="font-medium text-blue hover:underline"
                 key={i}
               >
                 {word + ' '}
