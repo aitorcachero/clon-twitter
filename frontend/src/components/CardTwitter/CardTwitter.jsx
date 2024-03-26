@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import checkTweetLikedByMe from '../../utils/checkTweetLikedByMe';
 import userDefaulIcon from '../../assets/icons/user-default-icon.svg';
 import { APIUrl } from '../../config';
+import formatTweet from '../../utils/formatTweet';
 
 export default function CardTwitter({ tweet }) {
   const { authToken, authUser } = useAuth();
@@ -79,9 +80,36 @@ export default function CardTwitter({ tweet }) {
           {formatDate(tweet.createdAt)}
         </p>
       </header>
-      <NavLink to={`/tweet/${tweet?.tweet_id}`}>
-        <h2 className="text-slate-500 my-5 text-center">{tweet.tweet_text}</h2>
-      </NavLink>
+
+      <h2 className="text-slate-500 my-5 text-center">
+        {tweet.tweet_text.split(' ').map((word, i) => {
+          if (word.startsWith('@')) {
+            return (
+              <NavLink
+                to={`/user/${word.slice(1)}`}
+                className="font-medium text-white hover:underline"
+                key={i}
+              >
+                {word + ' '}
+              </NavLink>
+            );
+          }
+          if (word.startsWith('http' || 'https' || 'www')) {
+            return (
+              <a
+                key={i}
+                href={word}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-white hover:underline"
+              >
+                {word}
+              </a>
+            );
+          }
+          return word + ' ';
+        })}
+      </h2>
 
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-row justify-center items-center gap-2">
