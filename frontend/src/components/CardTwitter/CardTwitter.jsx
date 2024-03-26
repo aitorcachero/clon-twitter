@@ -80,7 +80,6 @@ export default function CardTwitter({ tweet }) {
           {formatDate(tweet.createdAt)}
         </p>
       </header>
-
       <h2 className="text-slate-500 my-5 text-center">
         {tweet.tweet_text.split(' ').map((word, i) => {
           if (word.startsWith('@')) {
@@ -110,7 +109,7 @@ export default function CardTwitter({ tweet }) {
           return word + ' ';
         })}
       </h2>
-
+      // TRY
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-row justify-center items-center gap-2">
           <NavLink to={`/tweet/${tweet?.tweet_id}`}>
