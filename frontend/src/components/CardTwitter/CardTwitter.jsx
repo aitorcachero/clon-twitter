@@ -109,7 +109,6 @@ export default function CardTwitter({ tweet }) {
           return word + ' ';
         })}
       </h2>
-      // TRY
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-row justify-center items-center gap-2">
           <NavLink to={`/tweet/${tweet?.tweet_id}`}>
