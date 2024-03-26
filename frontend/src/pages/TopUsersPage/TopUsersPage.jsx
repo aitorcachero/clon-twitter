@@ -22,12 +22,14 @@ export default function TopUsersPage() {
   }, []);
 
   return (
-    <div className="w-full flex flex-col gap-10 justify-center items-center p-10">
-      {loader && <ProgressLoader />}
-      {topUsers && <TopsTweetsComponent list={topUsers.topTweets} />}
-      {topUsers && <TopsFollowersComponent list={topUsers.topFollowers} />}
-      {topUsers && <TopsFollowingsComponent list={topUsers.topFollowings} />}
-      {topUsers && <TopsLikesComponent list={topUsers.topLikes} />}
+    <div className="w-full flex flex-col gap-10 justify-center items-center  md:p-0">
+      <div className="grid md:grid-cols-2 gap-6 ">
+        {loader && <ProgressLoader />}
+        {topUsers && <TopsTweetsComponent list={topUsers.topTweets} />}
+        {topUsers && <TopsFollowersComponent list={topUsers.topFollowers} />}
+        {topUsers && <TopsFollowingsComponent list={topUsers.topFollowings} />}
+        {topUsers && <TopsLikesComponent list={topUsers.topLikes} />}
+      </div>
     </div>
   );
 }
