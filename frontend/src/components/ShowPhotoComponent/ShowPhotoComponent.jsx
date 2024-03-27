@@ -17,7 +17,10 @@ export default function ShowPhotoComponent({ photo, closeModal }) {
             backgroundClip: 'padding-box',
           }}
         >
-          <img src={photo} className="md:max-w-[768px] max-w-[300px]  " />
+          <img
+            src={photo}
+            className="md:max-w-[768px] max-w-[300px]  shadow-black shadow-xl"
+          />
           <ButtonComponent text="Cerrar" click={closeModal} />
         </div>
       </div>
