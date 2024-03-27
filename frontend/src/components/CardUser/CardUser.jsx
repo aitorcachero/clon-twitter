@@ -14,10 +14,13 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import FollowsComponent from '../FollowsComponent/FollowsComponent';
 import FollowersComponent from '../FollowersComponent/FollowersComponent';
 import WritePrivateMessage from '../WritePrivateMessage/WritePrivateMessage';
+import ShowPhotoComponent from '../ShowPhotoComponent/ShowPhotoComponent';
 
 export default function CardUser({ fullUser }) {
   const navigate = useNavigate();
   const { authUser, authToken, authLogout } = useAuth();
+
+  const [showPhoto, setShowPhoto] = useState(false);
 
   const [render, setRender] = useState('tweets');
   const [openPrivateMessage, setOpenPrivateMessage] = useState(false);
@@ -31,7 +34,6 @@ export default function CardUser({ fullUser }) {
   useEffect(() => {
     const checkFollow = () => {
       const USER_ID = fullUser?.user.id;
-      const AUTH_USER_ID = authUser?.id;
       const ARRAY_FOLLOWS = authUser?.arrayOfFollows;
       const result = ARRAY_FOLLOWS.includes(USER_ID);
 
@@ -59,6 +61,10 @@ export default function CardUser({ fullUser }) {
     if (followService.status === 'ok') setFollow(!follow);
   };
 
+  const handleShowPhoto = () => {
+    if (avatar) setShowPhoto(true);
+  };
+
   return (
     <div className="flex flex-col w-full justify-center items-center ">
       {openPrivateMessage && (
@@ -76,12 +82,22 @@ export default function CardUser({ fullUser }) {
           }}
         >
           <header className="flex flex-col justify-center items-center">
-            <div className="flex flex-row justify-between items-center w-full">
+            <div
+              className={`flex flex-row justify-between items-center w-full ${
+                avatar ? 'hover:cursor-pointer' : null
+              }`}
+            >
               <img
                 src={avatar ? `${APIUrl}/avatars/${avatar}` : defaultIconUser}
-                width={50}
-                className="rounded-full overflow-hidden"
+                className="rounded-full overflow-hidden w-16 h-16 object-cover"
+                onClick={handleShowPhoto}
               />
+              {showPhoto && (
+                <ShowPhotoComponent
+                  photo={`${APIUrl}/avatars/${avatar}`}
+                  closeModal={() => setShowPhoto(false)}
+                />
+              )}
               {authUser && authUser?.id !== fullUser?.user.id && (
                 <img
                   src={iconLetter}
@@ -139,13 +155,22 @@ export default function CardUser({ fullUser }) {
               </p>
             </div>
           </section>
-          <div className="mt-4 flex flex-row items-center justify-center md:justify-between px-4 gap-6">
-            <div className="flex flex-col md:flex-row md:justify-center items-start md:items-center gap-2">
+          <div className="mt-4 flex flex-row items-center justify-between md:justify-between px-4 gap-6 w-full">
+            <div className="flex md:flex-row flex-col justify-center items-center gap-2">
               <span className="text-center ">Miembro desde: </span>
               <span className="text-orange-600 text-sm text-center w-24 md:w-auto">
                 {formatDate(user.createdAt)}
               </span>
             </div>
+            {authUser?.id === fullUser?.user.id && (
+              <img
+                src={logoutImg}
+                width={30}
+                className=" hover:cursor-pointer "
+                onClick={() => authLogout()}
+              />
+            )}
+
             <button
               className={`rounded-lg border bg-zinc-800 px-4 py-2 ${
                 follow ? 'bg-green-800' : 'bg-zinc-800'
@@ -157,14 +182,6 @@ export default function CardUser({ fullUser }) {
               {buttonFollow}
             </button>
           </div>
-          {authUser?.id === fullUser?.user.id && (
-            <img
-              src={logoutImg}
-              width={30}
-              className="absolute bottom-5 right-5 hover:cursor-pointer"
-              onClick={() => authLogout()}
-            />
-          )}
         </article>
       )}
 
