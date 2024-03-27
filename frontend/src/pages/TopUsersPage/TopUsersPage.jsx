@@ -23,7 +23,7 @@ export default function TopUsersPage() {
 
   return (
     <div className="w-full flex flex-col gap-10 justify-center items-center  md:p-0">
-      <div className="grid md:grid-cols-2 gap-6 ">
+      <div className="grid lg:grid-cols-2 gap-6 ">
         {loader && <ProgressLoader />}
         {topUsers && <TopsTweetsComponent list={topUsers.topTweets} />}
         {topUsers && <TopsFollowersComponent list={topUsers.topFollowers} />}
