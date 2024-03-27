@@ -2,21 +2,10 @@ import goldIcon from '../../assets/icons/oro.webp';
 import silverIcon from '../../assets/icons/plata.webp';
 import bronzeIcon from '../../assets/icons/bronce.webp';
 import { NavLink } from 'react-router-dom';
+import topsColorText from '../../utils/topsColorText';
+import getIcon from '../../utils/topsMedals';
 
 export default function TopsFollowingsComponent({ list }) {
-  const getIcon = (i) => {
-    switch (i) {
-      case 0:
-        return goldIcon;
-      case 1:
-        return silverIcon;
-      case 2:
-        return bronzeIcon;
-      default:
-        return '';
-    }
-  };
-
   return (
     <>
       {list && list.length > 0 && (
@@ -39,7 +28,12 @@ export default function TopsFollowingsComponent({ list }) {
               <NavLink to={`/user/${item.username}`}>
                 <span>@{item.username.toLowerCase()}</span>
               </NavLink>
-              <span className="font-semibold text-xl">{item.following}</span>
+              <span
+                className="font-semibold text-xl"
+                style={{ color: topsColorText(i) }}
+              >
+                {item.following}
+              </span>
             </div>
           ))}
         </div>
