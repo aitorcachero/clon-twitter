@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import userDefaultIcon from '../../assets/icons/user-default-icon.svg';
+import { APIUrl } from '../../config';
 
 export default function FollowersComponent({ userFollower }) {
   return (
@@ -12,7 +13,14 @@ export default function FollowersComponent({ userFollower }) {
         }}
       >
         <div className="flex justify-center items-center w-1/4">
-          <img src={userDefaultIcon} width={50} />
+          <img
+            src={
+              userFollower?.photo
+                ? `${APIUrl}/avatars/${userFollower.photo}`
+                : userDefaultIcon
+            }
+            className="w-12 h-12 rounded-full object-cover"
+          />
         </div>
         <main className="flex flex-col justify-center items-start w-3/4 text-sm">
           <p>
